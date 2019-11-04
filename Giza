@@ -1,0 +1,22 @@
+public class Giza extends WonderBoard
+{
+
+	public void setRes() {
+		resource = "Metal";
+	}
+
+	public void setLoc() {
+		location = "The Pyramids of Giza";
+	}
+
+	public void addWonders() {
+		list.add("3");
+		list.add("5");
+		list.add("7");
+	}
+
+	public void build() {
+		list.build();
+	}
+	
+}
