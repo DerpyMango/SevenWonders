@@ -1,0 +1,18 @@
+public class Cost 
+{
+	private int[] resourceCost;
+	private String prerequisite;
+	public Cost(int[] rc, String p)
+	{
+		resourceCost = rc;
+		prerequisite = p;
+	}
+	public int[] getRCost()
+	{
+		return resourceCost;
+	}
+	public String getPrereq()
+	{
+		return prerequisite;
+	}
+}
