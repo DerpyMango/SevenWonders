@@ -1,0 +1,25 @@
+
+public abstract class WonderBoard {
+	
+	private String location;
+	private SomeList list;
+	private String resource;
+	
+	public WonderBoard()
+	{
+		list = new SomeList();
+	}
+	
+	public abstract void setRes();
+	
+	public abstract void setLoc();
+	
+	public String getLoc()
+	{
+		return location;
+	}
+	
+	public abstract void addWonders();
+	
+	public abstract void build(Card card);
+}
