@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+
+public class Player 
+{
+	
+	private int coins, milLosses, milVic;
+	private WonderBoard wb;
+	private ArrayList<Card>[] ownedCards, hand;
+	
+	public Player()
+	{
+		ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
+		hand = (ArrayList<Card>[])(new ArrayList[6]);
+		
+		setCoins(3);
+		setMilLosses(0);
+		setMilVic(0);
+	}
+	
+	public int getCoins()
+	{
+		return coins;
+	}
+	
+	public int getMilLosses()
+	{
+		return milLosses;
+	}
+	
+	public int getMilVics()
+	{
+		return milVic;
+	}
+	
+	private void setCoins(int c)
+	{
+		coins = c;
+	}
+	
+	public void addCoins(int c)
+	{
+		coins += c;
+	}
+	
+	private void setMilLosses(int ml)
+	{
+		milLosses = ml;
+	}
+	
+	public void addMilLoss(int losses)
+	{
+		milLosses += losses;
+	}
+	
+	private void setMilVic(int mv)
+	{
+		milVic = mv;
+	}
+	
+	public void addMilVic(int vics)
+	{
+		milVic += vics;
+	}
+	
+	public void setWonderBoard(WonderBoard w)
+	{
+		wb = w;
+	}
+	
+	public void setHand(ArrayList<Card>[] h)
+	{
+		hand = h;
+	}
+}
