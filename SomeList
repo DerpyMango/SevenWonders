@@ -1,0 +1,24 @@
+import java.util.Stack;
+public class SomeList {
+	private Stack<String> thing;
+	
+	public SomeList()
+	{
+		thing = new Stack<String>();
+	}
+	
+	public void add(String input)
+	{
+		thing.push(input);
+	}
+	
+	public String build()
+	{
+		return thing.pop();
+	}
+	
+	public String get()
+	{
+		return thing.peek();
+	}
+}
