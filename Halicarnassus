@@ -1,0 +1,23 @@
+
+public class Halicarnassus extends WonderBoard
+{
+
+	public void setRes() {
+		resource = "Cloth";
+	}
+
+	public void setLoc() {
+		location = "The Mausoleum of Halicarnassus";
+	}
+
+	public void addWonders() {
+		list.add("2 IDK");
+		list.add("1 IDK");
+		list.add("IDK");
+	}
+
+	public void build() {
+		list.build();
+	}
+	
+}
