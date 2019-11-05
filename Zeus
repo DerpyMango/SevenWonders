@@ -1,0 +1,23 @@
+
+public class Zeus extends WonderBoard
+{
+
+	public void setRes() {
+		resource = "Wood";
+	}
+
+	public void setLoc() {
+		location = "The Statue of Zeus";
+	}
+
+	public void addWonders() {
+		list.add("3");
+		list.add("IDK");
+		list.add("7");
+	}
+
+	public void build() {
+		list.build();
+	}
+	
+}
