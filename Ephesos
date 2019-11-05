@@ -1,0 +1,23 @@
+
+public class Ephesos extends WonderBoard
+{
+
+	public void setRes() {
+		resource = "Papyrus";
+	}
+
+	public void setLoc() {
+		location = "Éphesos";
+	}
+
+	public void addWonders() {
+		list.add("2 4C");
+		list.add("3 4C");
+		list.add("5 4C");
+	}
+
+	public void build() {
+		list.build();
+	}
+	
+}
