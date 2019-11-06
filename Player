@@ -1,10 +1,35 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player 
 {
-	
 	private int coins, milLosses, milVic;
 	private WonderBoard wb;
+	private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>() 
+	{
+		{
+			put("resource", 0);
+			put("military", 1);
+			put("science", 2);
+			put("commerce", 3);
+			put("civil", 4);
+			put("guild", 5);
+			put("trade", 6);
+		}
+	};
+	
+	private static final HashMap<String, Integer> handMap = new HashMap<String, Integer>() 
+	{
+		{
+			put("resource", 0);
+			put("military", 1);
+			put("science", 2);
+			put("commerce", 3);
+			put("civil", 4);
+			put("guild", 5);
+		}
+	};
+	
 	private ArrayList<Card>[] ownedCards, hand;
 	
 	public Player()
@@ -70,5 +95,11 @@ public class Player
 	public void setHand(ArrayList<Card>[] h)
 	{
 		hand = h;
+	}
+	
+	public boolean addToOwnedCards()
+	{
+		//work in progress
+		return false;
 	}
 }
