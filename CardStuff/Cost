@@ -18,5 +18,6 @@ public class Cost
 	public void print()
 	{
 		System.out.println("Material Cost: "+resourceCost.toString());
+		System.out.println("Prerequisite Cost: "+prerequisite);
 	}
 }
