@@ -1,0 +1,44 @@
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class GuildCard extends Card
+{
+	private CardEffect effect;
+	public GuildCard(Cost c,String n, String co, int a, String e)
+	{
+		//e is from input file and format is: true true true brownCa 1Co greyCa 1Co
+		super(c,n,co,a);
+		boolean[] ar = new boolean[3];
+		Scanner in = new Scanner(e);
+		for(int x=0;x<3;x++)
+		{
+			if(in.next().trim().equals("true"))
+			{
+				ar[x] = true;
+			}
+			else
+			{
+				ar[x] = false;
+			}
+		}
+		TreeMap<String,String> re = new TreeMap<String,String>();
+		while(in.hasNext())
+		{
+			re.put(in.next(), in.next());
+		}
+		effect = new CardEffect(ar,re);
+	}
+	public CardEffect getEffect()
+	{
+		return effect;
+	}
+	public void print()
+	{
+		super.print();
+		effect.print();
+	}
+	public String getType() 
+	{
+		return "guild";
+	}
+}
