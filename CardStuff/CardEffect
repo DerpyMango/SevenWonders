@@ -17,4 +17,8 @@ public class CardEffect
 	{
 		return reward;
 	}
+	public void print()
+	{
+		System.out.println("Card Effect: ");
+	}
 }
