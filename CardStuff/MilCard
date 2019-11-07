@@ -1,0 +1,23 @@
+
+public class MilCard extends Card
+{
+	private int armyCount;
+	public MilCard(Cost c,String n, String co, int a,int p)
+	{
+		super(c,n,co,a);
+		armyCount = p;
+	}
+	public int getArmyCount()
+	{
+		return armyCount;
+	}
+	public void print()
+	{
+		super.print();
+		System.out.println("Army Count: "+armyCount);
+	}
+	public String getType()
+	{
+		return "military";
+	}
+}
