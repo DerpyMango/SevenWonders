@@ -34,4 +34,5 @@ public abstract class Card
 		System.out.println("Age: "+age);
 		cost.print();
 	}
+	public abstract String getType();
 }
