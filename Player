@@ -97,9 +97,26 @@ public class Player
 		hand = h;
 	}
 	
-	public boolean addToOwnedCards()
+	public boolean addToOwnedCards(Card c)
 	{
-		//work in progress
-		return false;
+		if (canAfford(c))
+		{
+			ownedCards[ownedMap.get(c.getType())].add(c);
+			return true;
+		}
+		
+		else
+			return false;
+		
 	}
+	
+	public boolean canAfford(Card c)
+	{
+		for (Card card : ownedCards[ownedMap.get(c.getType())])
+		{
+			if ()
+		}
+	}
+	
+	
 }
