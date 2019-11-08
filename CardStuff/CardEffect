@@ -1,3 +1,4 @@
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 public class CardEffect 
@@ -19,6 +20,10 @@ public class CardEffect
 	}
 	public void print()
 	{
-		System.out.println("Card Effect: ");
+		System.out.print("Card Effect: "+arrows.toString());
+		for (Entry<String, String> entry : reward.entrySet()) 
+		{
+		     System.out.println("Key: " + entry.getKey() + ". Value: " + entry.getValue());
+		}
 	}
 }
