@@ -1,7 +1,9 @@
 public class Cost 
 {
+	private static final String[] resources = {"wood","stone","ore","clay","cloth","glass","papyrus"};
 	private int[] resourceCost;
 	private String prerequisite;
+	//order of resources is wood,stone,ore,clay,cloth,glass,papyrus
 	public Cost(int[] rc, String p)
 	{
 		resourceCost = rc;
@@ -18,6 +20,10 @@ public class Cost
 	public void print()
 	{
 		System.out.println("Material Cost: "+resourceCost.toString());
+		for(int x=0;x<7;x++)
+		{
+			System.out.print(resources[x]+": "+resourceCost[x]+" ");
+		}
 		System.out.println("Prerequisite Cost: "+prerequisite);
 	}
 }
