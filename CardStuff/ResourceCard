@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class ResourceCard extends Card
+{
+	private static final String[] resource = {"wood","stone","ore","clay","cloth","glass","papyrus"};
+	private int[] resources;
+	private boolean or;
+	public ResourceCard(Cost c,String n, String co, int a,String input,boolean o)
+	{
+		super(c,n,co,a);
+		or = o;
+		Scanner sc= new Scanner(input);
+		resources = new int[7];
+		int x=0;
+		while(sc.hasNext())
+		{
+			resources[x] = Integer.parseInt(sc.next());
+		}
+	}
+	public int[] getResources()
+	{
+		return resources;
+	}
+	public boolean getOr()
+	{
+		return or;
+	}
+	public void print()
+	{
+		super.print();
+		for(int x=0;x<7;x++)
+		{
+			System.out.print(resource[x]+": "+resources[x]+" ");
+		}
+		System.out.println();
+	}
+	public String getType()
+	{
+		return "resource";
+	}
+}
