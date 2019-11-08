@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Player 
@@ -8,13 +9,14 @@ public class Player
 	private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>() 
 	{
 		{
-			put("resource", 0);
-			put("military", 1);
-			put("science", 2);
-			put("commerce", 3);
-			put("civil", 4);
-			put("guild", 5);
-			put("trade", 6);
+			put("wb", 0);
+			put("resource", 1);
+			put("military", 2);
+			put("science", 3);
+			put("commerce", 4);
+			put("civil", 5);
+			put("guild", 6);
+			put("trade", 7);
 		}
 	};
 	
@@ -34,7 +36,7 @@ public class Player
 	
 	public Player()
 	{
-		ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
+		ownedCards = (ArrayList<Card>[])(new ArrayList[8]);
 		hand = (ArrayList<Card>[])(new ArrayList[6]);
 		
 		setCoins(3);
@@ -55,6 +57,16 @@ public class Player
 	public int getMilVics()
 	{
 		return milVic;
+	}
+	
+	public ArrayList<Card>[] getHand()
+	{
+		return hand;
+	}
+	
+	public ArrayList<Card>[] getOwnedCards()
+	{
+		return ownedCards;
 	}
 	
 	private void setCoins(int c)
@@ -112,9 +124,12 @@ public class Player
 	
 	public boolean canAfford(Card c)
 	{
-		for (Card card : ownedCards[ownedMap.get(c.getType())])
+		ArrayList<Integer> rCopy = new ArrayList<Integer>(Arrays.asList(c.getCost().getRCost()));
+		
+		
+		for (Card card : ownedCards[1])
 		{
-			if ()
+			
 		}
 	}
 	
