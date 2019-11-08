@@ -1,6 +1,7 @@
 
 public abstract class Card 
 {
+	//FIX CARD CONSTRUSTOR SO IT TAKES IN STRING FILE INPUT YOU APE!!!!!!!!!!!!!!!!!!!!
 	private Cost cost;
 	private String name,color;
 	private int age;
