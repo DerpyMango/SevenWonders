@@ -9,14 +9,13 @@ public class Player
 	private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>() 
 	{
 		{
-			put("wb", 0);
-			put("resource", 1);
-			put("military", 2);
-			put("science", 3);
-			put("commerce", 4);
-			put("civil", 5);
-			put("guild", 6);
-			put("trade", 7);
+			put("resource", 0);
+			put("military", 1);
+			put("science", 2);
+			put("commerce", 3);
+			put("civil", 4);
+			put("guild", 5);
+			put("trade", 6);
 		}
 	};
 	
@@ -36,7 +35,7 @@ public class Player
 	
 	public Player()
 	{
-		ownedCards = (ArrayList<Card>[])(new ArrayList[8]);
+		ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
 		hand = (ArrayList<Card>[])(new ArrayList[6]);
 		
 		setCoins(3);
@@ -124,10 +123,11 @@ public class Player
 	
 	public boolean canAfford(Card c)
 	{
-		ArrayList<Integer> rCopy = new ArrayList<Integer>(Arrays.asList(c.getCost().getRCost()));
+		int[] rCopy = c.getCost().getRCost();
 		
 		
-		for (Card card : ownedCards[1])
+		
+		for (Card card : ownedCards[0])
 		{
 			
 		}
