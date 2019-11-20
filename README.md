@@ -1,1 +1,1 @@
-If steal, INTERPOL attac u
+If steal, IntErPOl attac u
