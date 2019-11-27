@@ -2,7 +2,7 @@
 public class MilCard extends Card
 {
 	private int armyCount;
-	public MilCard(Cost c,String n, String co, int a,int p)
+	public MilCard(String c,String n, String co, int a,int p)
 	{
 		super(c,n,co,a);
 		armyCount = p;
