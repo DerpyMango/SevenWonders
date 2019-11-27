@@ -1,8 +1,7 @@
-
 public class CivilCard extends Card
 {
 	private int pointVal;
-	public CivilCard(Cost c,String n, String co, int a,int p)
+	public CivilCard(String c,String n, String co, int a,int p)
 	{
 		super(c,n,co,a);
 		pointVal = p;
