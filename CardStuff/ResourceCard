@@ -4,8 +4,8 @@ public class ResourceCard extends Card
 {
 	private static final String[] resource = {"wood","stone","ore","clay","cloth","glass","papyrus"};
 	private int[] resources;
-	private boolean or;
-	public ResourceCard(Cost c,String n, String co, int a,String input,boolean o)
+	private boolean or;//represents if you have `an option between resources
+	public ResourceCard(String c,String n, String co, int a,String input,boolean o)
 	{
 		super(c,n,co,a);
 		or = o;
@@ -39,3 +39,4 @@ public class ResourceCard extends Card
 		return "resource";
 	}
 }
+
