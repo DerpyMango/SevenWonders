@@ -1,13 +1,19 @@
+import java.util.Scanner;
 
 public abstract class Card 
 {
-	//FIX CARD CONSTRUSTOR SO IT TAKES IN STRING FILE INPUT YOU APE!!!!!!!!!!!!!!!!!!!!
 	private Cost cost;
 	private String name,color;
 	private int age;
-	public Card(Cost c,String n, String co, int a)
+	public Card(String c,String n, String co, int a)
 	{
-		cost =c;
+		Scanner sc = new Scanner(c);
+		int[] rc = new int[7];
+		for(int x=0;x<7;x++)
+		{
+			rc[x]=Integer.parseInt(sc.next());
+		}
+		cost = new Cost(rc,sc.next());
 		name = n;
 		color = co;
 		age = a;
