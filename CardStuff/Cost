@@ -1,29 +1,45 @@
-public class Cost 
+import java.util.Scanner;
+
+public abstract class Card 
 {
-	private static final String[] resources = {"wood","stone","ore","clay","cloth","glass","papyrus"};
-	private int[] resourceCost;
-	private String prerequisite;
-	//order of resources is wood,stone,ore,clay,cloth,glass,papyrus
-	public Cost(int[] rc, String p)
+	private Cost cost;
+	private String name,color;
+	private int age;
+	public Card(String c,String n, String co, int a)
 	{
-		resourceCost = rc;
-		prerequisite = p;
+		Scanner sc = new Scanner(c);
+		int[] rc = new int[7];
+		for(int x=0;x<7;x++)
+		{
+			rc[x]=Integer.parseInt(sc.next());
+		}
+		cost = new Cost(rc,sc.next());
+		name = n;
+		color = co;
+		age = a;
 	}
-	public int[] getRCost()
+	public Cost getCost()
 	{
-		return resourceCost;
+		return cost;
 	}
-	public String getPrereq()
+	public String getName()
 	{
-		return prerequisite;
+		return name;
+	}
+	public String getColor()
+	{
+		return color;
+	}
+	public int getAge()
+	{
+		return age;
 	}
 	public void print()
 	{
-		System.out.println("Material Cost: "+resourceCost.toString());
-		for(int x=0;x<7;x++)
-		{
-			System.out.print(resources[x]+": "+resourceCost[x]+" ");
-		}
-		System.out.println("Prerequisite Cost: "+prerequisite);
+		System.out.println("Name: "+name);
+		System.out.println("Color: "+color);
+		System.out.println("Age: "+age);
+		cost.print();
 	}
+	public abstract String getType();
 }
