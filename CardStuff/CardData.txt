@@ -1,0 +1,69 @@
+Cost is the same as resources thingy but add one at the end for number of coins
+Resource Cards
+Lumber Yard Brown  1          1000000 false
+Stone Pit   Brown  1          0100000 false
+Clay Pool   Brown  1          0001000 false
+Ore Vein    Brown  1          0010000 false
+Clay Pit    Brown  1 00000001 0011000 true
+Timber Yard Brown  1 00000001 1100000 true
+Loom        Silver 1          0000100 false
+Glass works Silver 1          0000010 false
+Press       Silver 1          0000001 false
+Sawmill     Brown  2 00000001 2000000 false
+Quarry      Brown  2 00000001 0200000 false
+Brick Yard  Brown  2 00000001 0002000 false
+Foundry     Brown  2 00000001 0020000 false
+Loom        Silver 2          0000100 false
+Glass works Silver 2          0000010 false
+Press       Silver 2          0000001 false
+Civil Cards  
+Baths       Blue 1 01000000 3
+Altar       Blue 1          2
+Theater     Blue 1          2
+Aqueduct    Blue 2 03000000 5
+Temple      Blue 2 10010100 3
+Statue      Blue 2 10200000 4
+Courthouse  Blue 2 00021000 4
+Pantheon    Blue 3 00121110 7
+Gardens     Blue 3 10020000 5
+Town Hall   Blue 3 02100100 6
+Palace      Blue 3 11111110 8
+Senate      Blue 3 21100000 6
+Military Cards
+Stockade       Red 1 10000000 1
+Barracks       Red 1 00100000 1
+Guard Tower    Red 1 00010000 1
+Walls          Red 2 03000000 2
+Stables        Red 2 10110000 2
+Archery Range  Red 2 20100000 2
+Fortifications Red 3 01300000 3
+Arsenal        Red 3 20101000 3
+Siege Workshop Red 3 10030000 3
+Science Cards 
+Apothecary   Green 1 00001000 Math
+Workshop     Green 1 00000100 Engineering
+Scriptorium  Green 1 00000010 Literature
+Dispensary   Green 2 00200100 Math
+Laboratory   Green 2 00020010 Engineering
+Library      Green 2 02001000 Literature
+School       Green 2 10000010 Literature
+Lodge        Green 3 00021010 Math
+Observatory  Green 3 00201100 Engineering
+University   Green 3 20000110 Literature
+Academy      Green 3 03000100 Math
+Study        Green 3 10001010 Engineering
+Commerce Cards
+East Trading Post Gold 1 00000000 false false true silverCa 1Co
+West Trading Post Gold 1 00000000 true false false silverCa 1Co
+Market Place      Gold 1 00000000 true false true brownCa 1Co
+Forum             Gold 2 00020000 false true false cloth - glass - papyrus -
+Caravansery       Gold 2 00020000 false true false wood - stone - ore - clay -
+
+
+
+
+
+
+
+
+
