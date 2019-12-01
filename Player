@@ -2,136 +2,223 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Player 
+public class Player
 {
-	private int coins, milLosses, milVic;
-	private WonderBoard wb;
-	private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>() 
-	{
-		{
-			put("resource", 0);
-			put("military", 1);
-			put("science", 2);
-			put("commerce", 3);
-			put("civil", 4);
-			put("guild", 5);
-			put("trade", 6);
-		}
-	};
-	
-	private static final HashMap<String, Integer> handMap = new HashMap<String, Integer>() 
-	{
-		{
-			put("resource", 0);
-			put("military", 1);
-			put("science", 2);
-			put("commerce", 3);
-			put("civil", 4);
-			put("guild", 5);
-		}
-	};
-	
-	private ArrayList<Card>[] ownedCards, hand;
-	
-	public Player()
-	{
-		ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
-		hand = (ArrayList<Card>[])(new ArrayList[6]);
-		
-		setCoins(3);
-		setMilLosses(0);
-		setMilVic(0);
-	}
-	
-	public int getCoins()
-	{
-		return coins;
-	}
-	
-	public int getMilLosses()
-	{
-		return milLosses;
-	}
-	
-	public int getMilVics()
-	{
-		return milVic;
-	}
-	
-	public ArrayList<Card>[] getHand()
-	{
-		return hand;
-	}
-	
-	public ArrayList<Card>[] getOwnedCards()
-	{
-		return ownedCards;
-	}
-	
-	private void setCoins(int c)
-	{
-		coins = c;
-	}
-	
-	public void addCoins(int c)
-	{
-		coins += c;
-	}
-	
-	private void setMilLosses(int ml)
-	{
-		milLosses = ml;
-	}
-	
-	public void addMilLoss(int losses)
-	{
-		milLosses += losses;
-	}
-	
-	private void setMilVic(int mv)
-	{
-		milVic = mv;
-	}
-	
-	public void addMilVic(int vics)
-	{
-		milVic += vics;
-	}
-	
-	public void setWonderBoard(WonderBoard w)
-	{
-		wb = w;
-	}
-	
-	public void setHand(ArrayList<Card>[] h)
-	{
-		hand = h;
-	}
-	
-	public boolean addToOwnedCards(Card c)
-	{
-		if (canAfford(c))
-		{
-			ownedCards[ownedMap.get(c.getType())].add(c);
-			return true;
-		}
-		
-		else
-			return false;
-		
-	}
-	
-	public boolean canAfford(Card c)
-	{
-		int[] rCopy = c.getCost().getRCost();
-		
-		
-		
-		for (Card card : ownedCards[0])
-		{
-			
-		}
-	}
-	
-	
+    private int coins, milLosses, milVic;
+    private WonderBoard wb;
+    private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>();
+    {
+        {
+            ownedMap.put("resource", 0);
+            ownedMap.put("military", 1);
+            ownedMap.put("science", 2);
+            ownedMap.put("commerce", 3);
+            ownedMap.put("civil", 4);
+            ownedMap.put("guild", 5);
+            ownedMap.put("trade", 6);
+        }
+    };
+
+    private static final HashMap<String, Integer> handMap = new HashMap<String, Integer>()
+    {
+        {
+            ownedMap.put("resource", 0);
+            ownedMap.put("military", 1);
+            ownedMap.put("science", 2);
+            ownedMap.put("commerce", 3);
+            ownedMap.put("civil", 4);
+            ownedMap.put("guild", 5);
+        }
+    };
+
+    private ArrayList<Card>[] ownedCards, hand;
+
+    public Player()
+    {
+        ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
+        hand = (ArrayList<Card>[])(new ArrayList[6]);
+
+        setCoins(3);
+        setMilLosses(0);
+        setMilVic(0);
+    }
+
+    public int getCoins()
+    {
+        return coins;
+    }
+
+    public int getMilLosses()
+    {
+        return milLosses;
+    }
+
+    public int getMilVics()
+    {
+        return milVic;
+    }
+
+    public ArrayList<Card>[] getHand()
+    {
+        return hand;
+    }
+
+    public ArrayList<Card>[] getOwnedCards()
+    {
+        return ownedCards;
+    }
+
+    private void setCoins(int c)
+    {
+        coins = c;
+    }
+
+    public void addCoins(int c)
+    {
+        coins += c;
+    }
+
+    private void setMilLosses(int ml)
+    {
+        milLosses = ml;
+    }
+
+    public void addMilLoss(int losses)
+    {
+        milLosses += losses;
+    }
+
+    private void setMilVic(int mv)
+    {
+        milVic = mv;
+    }
+
+    public void addMilVic(int vics)
+    {
+        milVic += vics;
+    }
+
+    public void setWonderBoard(WonderBoard w)
+    {
+        wb = w;
+    }
+
+    public void setHand(ArrayList<Card>[] h)
+    {
+        hand = h;
+    }
+
+    public boolean addToOwnedCards(Card c)
+    {
+        if (canAfford(c))
+        {
+            ownedCards[ownedMap.get(c.getType())].add(c);
+            return true;
+        }
+
+        else
+            return false;
+
+    }
+
+    public boolean canAfford(Card c)
+    {
+        Card p = c.getCost().getPrereq();
+
+        if (p != null)
+        {
+            for (Card cc : ownedCards[ownedMap.get(p.getType())])
+            {
+                if (cc.getName().equals(p.getName()))
+                    return true;
+            }
+        }
+
+        int[] costarr = c.getCost().getRCost();
+        int[] resources = new int[costarr.length];
+
+        for (Card cc : ownedCards[ownedMap.get("resource")])
+        {
+            for (int i = 0; i < cc.getResources().length; i++)
+            {
+                resources[i] += cc.getResources()[i];
+            }
+        }
+
+        resources[resources.length - 1] = coins;
+
+        for (int i = 0; i < costarr.length; i++)
+        {
+            if (resources[i] < costarr[i])
+                return false;
+        }
+
+        return true;
+    }
+
+
+
+    public boolean buildWonder(Card c)
+    {
+
+    }
+
+    public int wondersBuilt()
+    {
+
+    }
+
+    public int war(Player p)
+    {
+
+    }
+
+    public boolean trade(Card c, Player p)
+    {
+        
+    }
+
+    public int getMilStrength()
+    {
+        int ms = 0;
+
+        for (Card c : ownedCards[ownedMap.get("military")])
+        {
+            ms += c.getArmyCount();
+        }
+
+        return ms;
+    }
+
+    public int getCivPoints()
+    {
+
+    }
+
+    public int getScientificPoints()
+    {
+
+    }
+
+    public int getGuildPoints()
+    {
+
+    }
+
+    public int getWonderPoints()
+    {
+
+    }
+
+    public int getCommPoints()
+    {
+
+    }
+
+
+    public int calcVP()
+    {
+
+    }
+
 }
