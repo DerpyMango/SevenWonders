@@ -1,0 +1,57 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Deck 
+{
+	private ArrayList<Card> cards;
+	public Deck(int age) throws IOException
+	{
+		Scanner sc = new Scanner(new File("CardData.txt"));
+		String cost,name,color;
+		while(sc.hasNextLine())
+		{
+			if(sc.nextInt()==age)
+			{
+				color = sc.next().trim();
+				if(color.equals("brown"))
+				{
+					cards.add(new ResourceCard(sc.next(),sc.next(),color,age,sc.next(),sc.nextBoolean()));
+					sc.nextLine();
+				}
+				else if(color.equals("grey"))
+				{
+					cards.add(new ResourceCard(sc.next(),sc.next(),color,age,sc.next(),sc.nextBoolean()));
+					sc.nextLine();
+				}
+				else if(color.equals("blue"))
+				{
+					cards.add(new CivilCard(sc.next(),sc.next(),color,age,sc.nextInt()));
+					sc.nextLine();
+				}
+				else if(color.equals("gold"))
+				{
+					cards.add(new CommCard(sc.next(),sc.next(),color,age,sc.nextLine()));
+				}
+				else if(color.equals("red"))
+				{
+					cards.add(new MilCard(sc.next(),sc.next(),color,age,sc.nextInt()));
+					sc.nextLine();
+					
+				}
+				else if(color.equals("green"))
+				{
+					cards.add(new SciCard(sc.next(),sc.next(),color,age,sc.next()));
+					sc.nextLine();
+					
+				}
+				else if(color.equals("purple"))
+				{
+					cards.add(new GuildCard(sc.next(),sc.next(),color,age,sc.nextLine()));
+					
+				}
+			}
+		}
+	}
+}
