@@ -1,25 +1,25 @@
 Cost is the same as resources thingy but add one at the end for number of coins
 Resource Cards
-Lumber Yard Brown  1          1000000 false
-Stone Pit   Brown  1          0100000 false
-Clay Pool   Brown  1          0001000 false
-Ore Vein    Brown  1          0010000 false
-Clay Pit    Brown  1 00000001 0011000 true
-Timber Yard Brown  1 00000001 1100000 true
-Loom        Silver 1          0000100 false
-Glass works Silver 1          0000010 false
-Press       Silver 1          0000001 false
-Sawmill     Brown  2 00000001 2000000 false
-Quarry      Brown  2 00000001 0200000 false
-Brick Yard  Brown  2 00000001 0002000 false
-Foundry     Brown  2 00000001 0020000 false
-Loom        Silver 2          0000100 false
-Glass works Silver 2          0000010 false
-Press       Silver 2          0000001 false
+1 Brown Lumber Yard 00000000 1000000 false
+1 Brown Stone Pit   00000000 0100000 false
+1 Brown Clay Pool   00000000 0001000 false
+1 Brown Ore Vein    00000000 0010000 false
+1 Brown Clay Pit    00000001 0011000 true
+1 Brown Timber Yard 00000001 1100000 true
+1 Gray Loom         00000000 0000100 false
+1 Gray Glass works  00000000 0000010 false
+1 Gray Press        00000000 0000001 false
+2 Brown Sawmill     00000001 2000000 false
+2 Brown Quarry      00000001 0200000 false
+2 Brown Brick Yard  00000001 0002000 false
+2 Brown Foundry     00000001 0020000 false
+2 Gray Loom         00000000 0000100 false
+2 Gray Glass works  00000000 0000010 false
+2 Gray Press        00000000 0000001 false
 Civil Cards  
 Baths       Blue 1 01000000 3
-Altar       Blue 1          2
-Theater     Blue 1          2
+Altar       Blue 1 00000000 2
+Theater     Blue 1 00000000 2
 Aqueduct    Blue 2 03000000 5
 Temple      Blue 2 10010100 3
 Statue      Blue 2 10200000 4
@@ -41,29 +41,36 @@ Arsenal        Red 3 20101000 3
 Siege Workshop Red 3 10030000 3
 Science Cards 
 Apothecary   Green 1 00001000 Math
-Workshop     Green 1 00000100 Engineering
-Scriptorium  Green 1 00000010 Literature
+Workshop     Green 1 00000100 Engi
+Scriptorium  Green 1 00000010 Lit
 Dispensary   Green 2 00200100 Math
-Laboratory   Green 2 00020010 Engineering
-Library      Green 2 02001000 Literature
-School       Green 2 10000010 Literature
+Laboratory   Green 2 00020010 Engi
+Library      Green 2 02001000 Lit
+School       Green 2 10000010 Lit
 Lodge        Green 3 00021010 Math
-Observatory  Green 3 00201100 Engineering
-University   Green 3 20000110 Literature
+Observatory  Green 3 00201100 Engi
+University   Green 3 20000110 Lit
 Academy      Green 3 03000100 Math
-Study        Green 3 10001010 Engineering
+Study        Green 3 10001010 Engi
 Commerce Cards
-East Trading Post Gold 1 00000000 false false true silverCa 1Co
-West Trading Post Gold 1 00000000 true false false silverCa 1Co
+East Trading Post Gold 1 00000000 false false true grayCa 1Co
+West Trading Post Gold 1 00000000 true false false grayCa 1Co
 Market Place      Gold 1 00000000 true false true brownCa 1Co
-Forum             Gold 2 00020000 false true false cloth - glass - papyrus -
-Caravansery       Gold 2 00020000 false true false wood - stone - ore - clay -
-
-
-
-
-
-
-
-
-
+Forum             Gold 2 00020000 false true false cloth glass papyrus
+Caravansery       Gold 2 00020000 false true false wood stone ore clay
+Vineyard          Gold 2 00000000 true true true brownCa 1Co
+Bazar             Gold 2 00000000 true true true grayCa 2Co
+Haven             Gold 3 10101000 false true false brownCa 1Co1VP
+Lighthouse        Gold 3 01000100 false true false goldCa 1Co1VP
+Arena             Gold 3 02100000 false true false wTier 3Co1VP
+Guild Card
+Workers Guild      Purple 3 11210000 true false true brownCa 1VP
+Craftmens Guild    Purple 3 02200000 true false true greyCa 1VP
+Traders Guild      Purple 3 00001110 true false true goldCa 1VP
+Philosophers Guild Purple 3 00031010 true false true greenCa 1VP
+Spy Guild          Purple 3 00030100 true false true redCa 1VP
+Strategy Guild     Purple 3 01201000 true false true milLoss 1VP
+Shipowners Guild   Purple 3 30000110 false true false brownCa 1VP greyCa 1VP purpleCa 1VP
+Scientists Guild   Purple 3 20200010 false true false Math Engi Lit
+Magistrates Guild  Purple 3 31001000 true false true blueCa 1VP
+Builders Guild     Purple 3 02020100 true true true wTier 1VP
