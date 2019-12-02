@@ -16,40 +16,37 @@ public class Deck
 			if(sc.nextInt()==age)
 			{
 				color = sc.next().trim();
-				if(color.equals("brown"))
+				name = sc.next();
+				name.replaceAll("_", " ");
+				if(color.equals("brown")||color.equals("grey"))
 				{
-					cards.add(new ResourceCard(sc.next(),sc.next(),color,age,sc.next(),sc.nextBoolean()));
-					sc.nextLine();
-				}
-				else if(color.equals("grey"))
-				{
-					cards.add(new ResourceCard(sc.next(),sc.next(),color,age,sc.next(),sc.nextBoolean()));
+					cards.add(new ResourceCard(name,sc.next(),color,age,sc.next(),sc.nextBoolean()));
 					sc.nextLine();
 				}
 				else if(color.equals("blue"))
 				{
-					cards.add(new CivilCard(sc.next(),sc.next(),color,age,sc.nextInt()));
+					cards.add(new CivilCard(name,sc.next(),color,age,sc.nextInt()));
 					sc.nextLine();
 				}
 				else if(color.equals("gold"))
 				{
-					cards.add(new CommCard(sc.next(),sc.next(),color,age,sc.nextLine()));
+					cards.add(new CommCard(name,sc.next(),color,age,sc.nextLine()));
 				}
 				else if(color.equals("red"))
 				{
-					cards.add(new MilCard(sc.next(),sc.next(),color,age,sc.nextInt()));
+					cards.add(new MilCard(name,sc.next(),color,age,sc.nextInt()));
 					sc.nextLine();
 					
 				}
 				else if(color.equals("green"))
 				{
-					cards.add(new SciCard(sc.next(),sc.next(),color,age,sc.next()));
+					cards.add(new SciCard(name,sc.next(),color,age,sc.next()));
 					sc.nextLine();
 					
 				}
 				else if(color.equals("purple"))
 				{
-					cards.add(new GuildCard(sc.next(),sc.next(),color,age,sc.nextLine()));
+					cards.add(new GuildCard(name,sc.next(),color,age,sc.nextLine()));
 					
 				}
 			}
