@@ -1,0 +1,184 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class Board {
+	private ArrayList<Player> players;
+	private Deck[] decks;
+	private Deck currentDeck;
+	private ArrayList<WonderBoard> boards;
+	
+	public Board()
+	{
+		players = new ArrayList<Player>();
+		for(int i = 0; i < 3; i++)
+		{
+			players.add(new Player());
+		}
+		decks = new Deck[3];
+		for(int i = 0; i < 3; i++)
+		{
+			decks[i] == new Deck();
+		}
+		boards = new ArrayList<WonderBoard>();
+		boards.add(Alexandria alexandria = new Alexandria());
+		boards.add(Babylon babylon = new Babylon());
+		boards.add(Ephesos ephesos = new Ephesos());
+		boards.add(Giza giza = new Giza());
+		boards.add(Halicarnassus halicarnassus = new Halicarnassus());
+		boards.add(Rhodes rhodes = new Rhodes());
+		boards.add(Zeus zeus = new Zeus());
+	}
+	
+	public void play()
+	{
+		for(int i = 0; i < players.size(); i++)
+		{
+			String examp = "not";
+			while(exemp.equals("not"))
+			{
+				exemp = chooseWonderBoard(players.get(i));
+			}
+		}
+		while(true)
+		{
+			
+		}
+	}
+	
+	public void setDeck(int age)
+	{
+		currentDeck = decks[age - 1];
+	}
+	public int iteratePlayer(int place, int age)
+	{
+		if(age == 1 || age == 3)
+			if(place == 3)
+				return 1;
+			else
+				return ++place;
+		else if(age == 2)
+			if(place == 1)
+				return 3;
+			else
+				return --place;
+	}
+	public String chooseWonderBoard(Player player)
+	{
+		Scanner kb = new Scanner(System.in);
+		for(int i = 0; i < boards.size(); i++)
+		{
+			System.out.print(boards.get(i) + "	 ");
+		}
+		System.out.print("\nChoose a location");
+		String thing = kb.next();
+		if(thing.equalsIgnoreCase("Giza"))
+		{
+			Giza giza = new Giza();
+			if(boards.contains(giza))
+			{
+				player.setWonderBoard(giza);
+				boards.remove(giza);
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+		}
+		else if(thing.equalsIgnoreCase("Alexandria"))
+		{
+			Alexandria alexandria = new Alexandria();
+			if(boards.contains(alexandria))
+			{
+				player.setWonderBoard(alexandria);
+				boards.remove(alexandria);
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+			
+		}
+		else if(thing.equalsIgnoreCase("Halicarnassus"))
+		{
+			Halicarnassus halicarnassus = new Halicarnassus();
+			if(boards.contains(halicarnassus))
+			{
+				player.setWonderBoard(halicarnassus);
+				boards.remove(halicarnassus);
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+			
+		}
+		else if(thing.equalsIgnoreCase("Rhodes"))
+		{
+			Rhodes rhodes = new Rhodes();
+			if(boards.contains(rhodes))
+			{
+				player.setWonderBoard(rhodes);
+				boards.remove();
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+		}
+		else if(thing.equalsIgnoreCase("Zeus"))
+		{
+			Zeus zeus= new Zeus();
+			if(boards.contains(zeus))
+			{
+				player.setWonderBoard(zeus);
+				boards.remove(zeus);
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+			
+		}
+		else if(thing.equalsIgnoreCase("Ephesos"))
+		{
+			Ephesos ephesos= new Ephesos();
+			if(boards.contains(ephesos))
+			{
+				player.setWonderBoard(ephesos);
+				boards.remove(ephesos);
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+		}
+		else if(thing.equalsIgnoreCase("Babylon"))
+		{
+			Babylon babylon= new Babylon();
+			if(boards.contains(babylon))
+			{
+				player.setWonderBoard(babylon);
+				boards.remove(babylon);
+				return "yes";
+			}
+			else
+			{
+				System.out.println("Pick again");
+				return "not";
+			}
+		}
+	}
+}
