@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-
+//https://www.ultraboardgames.com/7wonders/ the prereq might be here, put null if it doesnt have
 public class Deck 
 {
 	private ArrayList<Card> cards;
