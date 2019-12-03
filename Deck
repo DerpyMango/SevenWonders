@@ -9,48 +9,52 @@ public class Deck
 	private ArrayList<Card> cards;
 	public Deck(int age) throws IOException
 	{
-		Scanner sc = new Scanner(new File("CardData.txt"));
+		Scanner in = new Scanner(new File("CardData.txt"));
+		
+		cards = new ArrayList<Card>();
 		String cost,name,color;
-		while(sc.hasNextLine())
+		int a;
+		while(in.hasNextLine())
 		{
-			if(sc.nextInt()==age)
+			Scanner sc = new Scanner(in.nextLine());
+			a=sc.nextInt();
+			if(a == age)
 			{
 				color = sc.next().trim();
 				name = sc.next();
-				name.replaceAll("_", " ");
-				if(color.equals("brown")||color.equals("grey"))
+				name = name.replaceAll("_", " ");
+				System.out.println(color+name+a);
+				if(color.equals("Brown")||color.equals("Grey"))
 				{
-					cards.add(new ResourceCard(name,sc.next(),color,age,sc.next(),sc.nextBoolean()));
-					sc.nextLine();
+					cards.add(new ResourceCard(sc.next(),name,color,age,sc.next(),sc.nextBoolean()));
 				}
-				else if(color.equals("blue"))
+				else if(color.equals("Blue"))
 				{
 					cards.add(new CivilCard(name,sc.next(),color,age,sc.nextInt()));
-					sc.nextLine();
 				}
-				else if(color.equals("gold"))
+				else if(color.equals("Gold"))
 				{
 					cards.add(new CommCard(name,sc.next(),color,age,sc.nextLine()));
 				}
-				else if(color.equals("red"))
+				else if(color.equals("Red"))
 				{
 					cards.add(new MilCard(name,sc.next(),color,age,sc.nextInt()));
-					sc.nextLine();
 					
 				}
-				else if(color.equals("green"))
+				else if(color.equals("Green"))
 				{
 					cards.add(new SciCard(name,sc.next(),color,age,sc.next()));
-					sc.nextLine();
 					
 				}
-				else if(color.equals("purple"))
+				else if(color.equals("Purple"))
 				{
 					cards.add(new GuildCard(name,sc.next(),color,age,sc.nextLine()));
 					
 				}
+				sc.nextLine();
 			}
 		}
+		shuffle();
 	}
 	public Card deal()
 	{
@@ -59,5 +63,12 @@ public class Deck
 	public void shuffle()
 	{
 		Collections.shuffle(cards);
+	}
+	public void print()
+	{
+		for(int x=0;x<cards.size();x++)
+		{
+			cards.get(x).print();
+		}
 	}
 }
