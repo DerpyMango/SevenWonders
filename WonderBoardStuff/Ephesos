@@ -11,13 +11,20 @@ public class Ephesos extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("2 4C");
-		list.add("3 4C");
-		list.add("5 4C");
+		list.add("7");
+		list.add("9C");
+		list.add("3");
 	}
 
-	public void build() {
-		list.build();
+	public String build() {
+		String thing = list.build();
+		if(thing.contains("C"))
+			return thing;
+		else
+		{
+			VictoPoints.add(thing);
+			return "";
+		}
 	}
 	
 }
