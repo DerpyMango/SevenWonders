@@ -1,13 +1,22 @@
 
 public abstract class WonderBoard {
 	
-	private String location;
-	private SomeList list;
-	private String resource;
+	protected String location;
+	protected SomeList list;
+	protected String resource;
+	protected SomeList VictoPoints;
+	protected String ending;
 	
 	public WonderBoard()
 	{
 		list = new SomeList();
+		VictoPoints = new SomeList();
+		ending = "";
+	}
+	
+	public String checkIfBuildable(int c)
+	{
+		
 	}
 	
 	public abstract void setRes();
@@ -21,5 +30,5 @@ public abstract class WonderBoard {
 	
 	public abstract void addWonders();
 	
-	public abstract void build();
+	public abstract String build();
 }
