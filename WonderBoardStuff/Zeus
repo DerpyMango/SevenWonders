@@ -11,13 +11,20 @@ public class Zeus extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("3");
-		list.add("IDK");
 		list.add("7");
+		list.add("NOPAY");
+		list.add("3");
 	}
 
-	public void build() {
-		list.build();
+	public String build() {
+		String thing = list.build();
+		if(thing.equals("NOPAY"))
+			return thing;
+		else
+		{
+			VictoPoints.add(thing);
+			return "";
+		}
 	}
 	
 }
