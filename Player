@@ -159,7 +159,6 @@ public class Player
     
     public boolean canAfford(Cost c)
     {
-
         int[] costarr = c.getRCost();
         int[] resources = new int[costarr.length];
 
@@ -171,9 +170,9 @@ public class Player
             }
         }
 
-        resources[resources.length - 1] = coins;
+        //resources[resources.length - 1] = coins;
 
-        for (int i = 0; i < costarr.length; i++)
+        for (int i = 0; i < costarr.length-1; i++)
         {
             if (resources[i] < costarr[i])
                 return false;
@@ -182,11 +181,11 @@ public class Player
         return true;
     }
     
-
-    
-    
     public boolean buildWonder(Card c)
     {
+    	if (canAfford(/*cost returned by wonderboard*/))
+    		wb.build();
+    	ownedCards[ownedMap.get(c.)]
     	
     }
 
