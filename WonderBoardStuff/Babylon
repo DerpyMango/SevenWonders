@@ -11,13 +11,23 @@ public class Babylon extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("3");
-		list.add("L O A O E");
 		list.add("7");
+		list.add("Lit/Math/Engi");
+		list.add("3");
 	}
 
-	public void build() {
-		list.build();
+	public String build() {
+		String thing = list.build();
+		if(thing.contains("Lit"))
+		{
+			ending +=  thing + "/";
+			return "";
+		}
+		else
+		{
+			VictoPoints.add(thing);
+			return "";
+		}
 	}
 	
 }
