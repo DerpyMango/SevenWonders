@@ -1,3 +1,4 @@
+
 public class Giza extends WonderBoard
 {
 
@@ -10,13 +11,15 @@ public class Giza extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("3");
-		list.add("5");
 		list.add("7");
+		list.add("5");
+		list.add("3");
 	}
 
-	public void build() {
-		list.build();
+	public String build() {
+		String thing = list.build();
+		VictoPoints.add(thing);
+		return "";
 	}
 	
 }
