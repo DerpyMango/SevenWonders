@@ -11,13 +11,23 @@ public class Alexandria extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("3");
-		list.add("IDK");
 		list.add("7");
+		list.add("c/o/w/m");
+		list.add("3");
 	}
 
-	public void build() {
-		list.build();
+	public String build() {
+		String thing = list.build();
+		if(thing.contains("c"))
+		{
+			ending += thing + "\\";
+			return "";
+		}
+		else
+		{
+			VictoPoints.add(thing);
+			return "";
+		}
 	}
 	
 }
