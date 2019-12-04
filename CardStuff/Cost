@@ -1,6 +1,6 @@
 public class Cost 
 {
-	private static final String[] resources = {"wood","stone","ore","clay","cloth","glass","papyrus"};
+	private static final String[] resources = {"wood","stone","ore","clay","cloth","glass","papyrus","coins"};
 	private int[] resourceCost;
 	private String prerequisite;
 	//order of resources is wood,stone,ore,clay,cloth,glass,papyrus
