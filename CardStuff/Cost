@@ -19,8 +19,8 @@ public class Cost
 	}
 	public void print()
 	{
-		System.out.println("Material Cost: "+resourceCost.toString());
-		for(int x=0;x<7;x++)
+		System.out.print("Cost: ");
+		for(int x=0;x<8;x++)
 		{
 			System.out.print(resources[x]+": "+resourceCost[x]+" ");
 		}
