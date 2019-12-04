@@ -2,21 +2,39 @@
 public abstract class WonderBoard {
 	
 	protected String location;
-	protected SomeList list;
+	protected Stack list;
 	protected String resource;
-	protected SomeList VictoPoints;
+	protected ArrayList VictoPoints;
 	protected String ending;
+	protected Cost cost;
 	
 	public WonderBoard()
 	{
 		list = new SomeList();
 		VictoPoints = new SomeList();
 		ending = "";
+		cost = new Cost(new int[], "");
 	}
 	
-	public String checkIfBuildable(int c)
+	public boolean checkIfBuildable(int coins, int[] resources)
 	{
-		
+		int[] temp = cost.getRCost();
+		boolean buildable == false;
+		for(int i = 0; i < resources.length; i++)
+		{
+			if(temp[i] > 0)
+			{
+				if(temp[i] < resources[i])
+				{
+					buildable = true;
+				}
+				else
+				{
+					buildable = false;
+				}
+			}		
+		}
+		return buildable;
 	}
 	
 	public abstract void setRes();
