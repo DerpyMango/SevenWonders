@@ -9,12 +9,11 @@ public class ResourceCard extends Card
 	{
 		super(c,n,co,a);
 		or = o;
-		Scanner sc= new Scanner(input);
+		String[] fill = input.split("");
 		resources = new int[7];
-		int x=0;
-		while(sc.hasNext())
+		for(int x=0;x<7;x++)
 		{
-			resources[x] = Integer.parseInt(sc.next());
+			resources[x] = Integer.parseInt(fill[x]);
 		}
 	}
 	public int[] getResources()
@@ -39,4 +38,3 @@ public class ResourceCard extends Card
 		return "resource";
 	}
 }
-
