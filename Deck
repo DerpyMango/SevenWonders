@@ -26,7 +26,7 @@ public class Deck
 				System.out.println(color+name+a);
 				if(color.equals("Brown")||color.equals("Grey"))
 				{
-					cards.add(new ResourceCard(sc.next(),name,color,age,sc.next(),sc.nextBoolean()));
+					cards.add(new ResourceCard(name,sc.next(),color,age,sc.next(),sc.nextBoolean()));
 				}
 				else if(color.equals("Blue"))
 				{
