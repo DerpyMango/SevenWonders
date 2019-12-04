@@ -69,3 +69,4 @@
 3 Purple Scientists_Guild   20200010null false true false Math Engi Lit
 3 Purple Magistrates_Guild  31001000null true false true blueCa 1VP
 3 Purple Builders_Guild     02020100null true true true wTier 1VP
+
