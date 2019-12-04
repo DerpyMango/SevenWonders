@@ -191,13 +191,9 @@ public class Player
 
     public int wondersBuilt()
     {
-
+    	return wb.numWonders();
     }
 
-    public int war(Player p)
-    {
-
-    }
 
     public boolean trade(Card c, Player p)
     {
@@ -218,33 +214,33 @@ public class Player
 
     public int getCivPoints()
     {
-
+    	
     }
 
     public int getScientificPoints()
     {
-
+    	
     }
 
     public int getGuildPoints()
     {
-
+    	
     }
 
     public int getWonderPoints()
     {
-
+    	
     }
 
     public int getCommPoints()
     {
-
+    	
     }
 
 
     public int calcVP()
     {
-
+    	
     }
 
 }
