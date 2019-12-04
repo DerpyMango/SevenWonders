@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 public abstract class Card 
 {
@@ -7,13 +7,13 @@ public abstract class Card
 	private int age;
 	public Card(String c,String n, String co, int a)
 	{
-		Scanner sc = new Scanner(c);
-		int[] rc = new int[7];
-		for(int x=0;x<7;x++)
+		String[] fill = c.substring(0,9).split("");
+		int[] rc = new int[8];
+		for(int x=0;x<8;x++)
 		{
-			rc[x]=Integer.parseInt(sc.next());
+			rc[x]=Integer.parseInt(fill[x]);
 		}
-		cost = new Cost(rc,sc.next());
+		cost = new Cost(rc,c.substring(8));
 		name = n;
 		color = co;
 		age = a;
