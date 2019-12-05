@@ -63,6 +63,28 @@ public class Board {
 			else
 				return --place;
 	}
+	public void passDeck(int age)
+	{
+		if(age%2==1)
+		{
+			ArrayList<Card>[] temp1 = players.get(0).getHand();
+			ArrayList<Card>[] temp2 = players.get(1).getHand();
+			ArrayList<Card>[] temp3 = players.get(2).getHand();
+			players.get(0).setHand(temp3);
+			players.get(1).setHand(temp1);
+			players.get(2).setHand(temp2);
+		}
+		else
+		{
+			ArrayList<Card>[] temp1 = players.get(0).getHand();
+			ArrayList<Card>[] temp2 = players.get(1).getHand();
+			ArrayList<Card>[] temp3 = players.get(2).getHand();
+			players.get(0).setHand(temp2);
+			players.get(1).setHand(temp3);
+			players.get(2).setHand(temp1);
+		}
+			
+	}
 	public String chooseWonderBoard(Player player)
 	{
 		Scanner kb = new Scanner(System.in);
