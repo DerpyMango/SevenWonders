@@ -24,7 +24,7 @@ public class CardEffect
 		System.out.print("Card Effect: "+Arrays.toString(arrows));
 		for (Entry<String, String> entry : reward.entrySet()) 
 		{
-		     System.out.println("Key: " + entry.getKey() + ". Value: " + entry.getValue());
+		     System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
 		}
 	}
 }
