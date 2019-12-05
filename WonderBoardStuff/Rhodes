@@ -11,19 +11,19 @@ public class Rhodes extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("7");
-		list.add("2 A");
-		list.add("3");
+		list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("2 A", new Cost(new int[] {0, 0, 0, 3, 0, 0, 0, 0}, ""));
+		list.put("7", new Cost(new int[] {0, 0, 4, 0, 0, 0, 0, 0}, ""));
 	}
 
-	public String build() {
-		String thing = list.build();
+	public void build() {
+		String thing = (String)iter.next();
+		temp++;
 		if(thing.contains("A"))
-			return thing;
+			army += thing + "\\";
 		else
 		{
 			VictoPoints.add(thing);
-			return "";
 		}
 	}
 	
