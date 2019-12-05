@@ -37,6 +37,7 @@ public class Player
     {
         ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
         hand = (ArrayList<Card>[])(new ArrayList[6]);
+        
 
         setCoins(3);
         setMilLosses(0);
@@ -124,13 +125,13 @@ public class Player
 
     public boolean canAfford(Card c)
     {
-        Card p = c.getCost().getPrereq();
+        String p = c.getCost().getPrereq();
 
         if (p != null)
         {
             for (Card cc : ownedCards[ownedMap.get(p.getType())])
             {
-                if (cc.getName().equals(p.getName()))
+                if (cc.getName().equals(p))
                     return true;
             }
         }
@@ -164,9 +165,9 @@ public class Player
 
         for (Card cc : ownedCards[ownedMap.get("resource")])
         {
-            for (int i = 0; i < cc.getResources().length; i++)
+            for (int i = 0; i < ((ResourceCard) cc).getResources().length; i++)
             {
-                resources[i] += cc.getResources()[i];
+                resources[i] += ((ResourceCard) cc).getResources()[i];
             }
         }
 
@@ -204,9 +205,9 @@ public class Player
     {
         int ms = 0;
 
-        for (Card c : ownedCards[ownedMap.get("military")])
+        for (Card c : /*WIP*/)
         {
-            ms += c.getArmyCount();
+        	ms += c.getArmyCount();
         }
 
         return ms;
