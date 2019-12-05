@@ -1,45 +1,60 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Stack;
 
 public abstract class WonderBoard {
 	
 	protected String location;
-	protected Stack list;
+	protected HashMap<String, Cost> list;
 	protected String resource;
 	protected ArrayList VictoPoints;
 	protected String ending;
-	protected Cost cost;
+	protected Iterator iter;
+	protected int temp;
+	protected String army;
+	protected String pay;
+	protected String coins;
 	
 	public WonderBoard()
 	{
-		list = new SomeList();
-		VictoPoints = new SomeList();
+		coins = "";
+		pay = "";
+		army = "";
+		list = new HashMap<String, Cost>();
+		VictoPoints = new ArrayList();
 		ending = "";
-		cost = new Cost(new int[], "");
-	}
-	
-	public boolean checkIfBuildable(int coins, int[] resources)
-	{
-		int[] temp = cost.getRCost();
-		boolean buildable == false;
-		for(int i = 0; i < resources.length; i++)
-		{
-			if(temp[i] > 0)
-			{
-				if(temp[i] < resources[i])
-				{
-					buildable = true;
-				}
-				else
-				{
-					buildable = false;
-				}
-			}		
-		}
-		return buildable;
+		temp = 0;
 	}
 	
 	public abstract void setRes();
 	
+	public int coins()
+	{
+		return Integer.parseInt(coins);
+	}
+	
+	public String checkPay()
+	{
+		return pay;
+	}
+	
+	public String getArmy()
+	{
+		return army;
+	}
+	
 	public abstract void setLoc();
+	
+	public void create()
+	{
+		iter = list.entrySet().iterator();
+	}
+	
+	public int numWonders()
+	{
+		return temp;
+	}
 	
 	public String getLoc()
 	{
@@ -48,5 +63,10 @@ public abstract class WonderBoard {
 	
 	public abstract void addWonders();
 	
-	public abstract String build();
+	public abstract void build();
+	
+	public String getEnd()
+	{
+		return ending;
+	}
 }
