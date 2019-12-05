@@ -17,7 +17,7 @@ public class Alexandria extends WonderBoard
 	}
 
 	public void build() {
-		String thing = list.build();
+		String thing = iter.next();
 		temp++;
 		if(thing.contains("c"))
 		{
