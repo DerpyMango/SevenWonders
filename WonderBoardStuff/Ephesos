@@ -7,23 +7,23 @@ public class Ephesos extends WonderBoard
 	}
 
 	public void setLoc() {
-		location = "Éphesos";
+		location = "The Temple of Artemis at Ephesus";
 	}
 
 	public void addWonders() {
-		list.add("7");
-		list.add("9C");
-		list.add("3");
+		list.put("7", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("9C", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("3", new Cost(new int[] {0, 0, 0, 2, 0, 0, 0, 0}, ""));
 	}
 
-	public String build() {
-		String thing = list.build();
+	public void build() {
+		String thing = (String)iter.next();
+		temp++;
 		if(thing.contains("C"))
-			return thing;
+			coins = thing;
 		else
 		{
 			VictoPoints.add(thing);
-			return "";
 		}
 	}
 	
