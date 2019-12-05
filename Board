@@ -18,16 +18,16 @@ public class Board {
 		decks = new Deck[3];
 		for(int i = 0; i < 3; i++)
 		{
-			decks[i] == new Deck();
+			decks[i] = new Deck(i+1);
 		}
 		boards = new ArrayList<WonderBoard>();
-		boards.add(Alexandria alexandria = new Alexandria());
-		boards.add(Babylon babylon = new Babylon());
-		boards.add(Ephesos ephesos = new Ephesos());
-		boards.add(Giza giza = new Giza());
-		boards.add(Halicarnassus halicarnassus = new Halicarnassus());
-		boards.add(Rhodes rhodes = new Rhodes());
-		boards.add(Zeus zeus = new Zeus());
+		boards.add(new Alexandria());
+		boards.add(new Babylon());
+		boards.add(new Ephesos());
+		boards.add(new Giza());
+		boards.add(new Halicarnassus());
+		boards.add(new Rhodes());
+		boards.add(new Zeus());
 	}
 	
 	public void play()
@@ -35,9 +35,9 @@ public class Board {
 		for(int i = 0; i < players.size(); i++)
 		{
 			String examp = "not";
-			while(exemp.equals("not"))
+			while(examp.equals("not"))
 			{
-				exemp = chooseWonderBoard(players.get(i));
+				examp = chooseWonderBoard(players.get(i));
 			}
 		}
 		while(true)
@@ -148,7 +148,7 @@ public class Board {
 			if(boards.contains(rhodes))
 			{
 				player.setWonderBoard(rhodes);
-				boards.remove();
+				boards.remove(rhodes);
 				return "yes";
 			}
 			else
