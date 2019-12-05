@@ -11,22 +11,21 @@ public class Alexandria extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("7");
-		list.add("c/o/w/m");
-		list.add("3");
+		list.put("7", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("c/o/w/m", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("3", new Cost(new int[] {0, 0, 0, 0, 0, 2, 0, 0}, ""));
 	}
 
-	public String build() {
+	public void build() {
 		String thing = list.build();
+		temp++;
 		if(thing.contains("c"))
 		{
 			ending += thing + "\\";
-			return "";
 		}
 		else
 		{
 			VictoPoints.add(thing);
-			return "";
 		}
 	}
 	
