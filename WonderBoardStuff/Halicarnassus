@@ -11,20 +11,20 @@ public class Halicarnassus extends WonderBoard
 	}
 
 	public void addWonders() {
-		list.add("7");
-		list.add("NOPAY");
-		list.add("3");
+		list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("NOPAY", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("7", new Cost(new int[] {0, 0, 2, 0, 0, 0, 0, 0}, ""));
 	}
 
-	public String build() {
-		String thing = list.build();
-		if(thing.equals("NOPAY"))
-			return thing;
-		else
-		{
-			VictoPoints.add(thing);
-			return "";
+	public void build() {
+			String thing = (String) iter.next();
+			temp++;
+			if(thing.equals("NOPAY"))
+				pay = thing;
+			else
+			{
+				VictoPoints.add(thing);
+			}
 		}
-	}
 	
 }
