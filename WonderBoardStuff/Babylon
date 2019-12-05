@@ -1,33 +1,29 @@
 
-public class Babylon extends WonderBoard
+public class Zeus extends WonderBoard
 {
 
 	public void setRes() {
-		resource = "Clay";
+		resource = "Wood";
 	}
 
 	public void setLoc() {
-		location = "The Hanging Gardens of Babylon";
+		location = "The Statue of Zeus";
 	}
 
 	public void addWonders() {
-		list.add("7");
-		list.add("Lit/Math/Engi");
-		list.add("3");
+		list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("NOPAY", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+		list.put("7", new Cost(new int[] {0, 0, 2, 0, 0, 0, 0, 0}, ""));
 	}
 
-	public String build() {
-		String thing = list.build();
-		if(thing.contains("Lit"))
-		{
-			ending +=  thing + "/";
-			return "";
+	public void build() {
+			String thing = (String) iter.next();
+			temp++;
+			if(thing.equals("NOPAY"))
+				pay = thing;
+			else
+			{
+				VictoPoints.add(thing);
+			}
 		}
-		else
-		{
-			VictoPoints.add(thing);
-			return "";
-		}
-	}
-	
 }
