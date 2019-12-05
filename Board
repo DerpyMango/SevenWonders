@@ -62,6 +62,7 @@ public class Board {
 				return 3;
 			else
 				return --place;
+		return -1;
 	}
 	public void passDeck(int age)
 	{
