@@ -129,7 +129,7 @@ public class Player
 
         if (p != null)
         {
-            for (Card cc : ownedCards[ownedMap.get(p.getType())])
+            for (Card cc : ownedCards[ownedMap.get(c.getType())])
             {
                 if (cc.getName().equals(p))
                     return true;
