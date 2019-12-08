@@ -25,7 +25,6 @@ public class Deck
 				color = sc.next().trim();
 				name = sc.next();
 				name = name.replaceAll("_", " ");
-				System.out.println(color+name+a);
 				if(color.equals("Brown")||color.equals("Gray"))
 				{
 					cards.add(new ResourceCard(sc.next(),name,color,age,sc.next(),sc.nextBoolean()));
