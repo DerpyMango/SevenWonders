@@ -14,8 +14,10 @@ public class Deck
 		cards = new ArrayList<Card>();
 		String cost,name,color;
 		int a;
+		ArrayList<Card> guilds = new ArrayList<Card>();
 		while(in.hasNextLine())
 		{
+			
 			Scanner sc = new Scanner(in.nextLine());
 			a=sc.nextInt();
 			if(a == age)
@@ -24,37 +26,43 @@ public class Deck
 				name = sc.next();
 				name = name.replaceAll("_", " ");
 				System.out.println(color+name+a);
-				if(color.equals("Brown")||color.equals("Grey"))
+				if(color.equals("Brown")||color.equals("Gray"))
 				{
-					cards.add(new ResourceCard(name,sc.next(),color,age,sc.next(),sc.nextBoolean()));
+					cards.add(new ResourceCard(sc.next(),name,color,age,sc.next(),sc.nextBoolean()));
 				}
 				else if(color.equals("Blue"))
 				{
-					cards.add(new CivilCard(name,sc.next(),color,age,sc.nextInt()));
+					cards.add(new CivilCard(sc.next(),name,color,age,sc.nextInt()));
 				}
 				else if(color.equals("Gold"))
 				{
-					cards.add(new CommCard(name,sc.next(),color,age,sc.nextLine()));
+					cards.add(new CommCard(sc.next(),name,color,age,sc.nextLine()));
 				}
 				else if(color.equals("Red"))
 				{
-					cards.add(new MilCard(name,sc.next(),color,age,sc.nextInt()));
+					cards.add(new MilCard(sc.next(),name,color,age,sc.nextInt()));
 					
 				}
 				else if(color.equals("Green"))
 				{
-					cards.add(new SciCard(name,sc.next(),color,age,sc.next()));
+					cards.add(new SciCard(sc.next(),name,color,age,sc.next()));
 					
 				}
 				else if(color.equals("Purple"))
 				{
-					cards.add(new GuildCard(name,sc.next(),color,age,sc.nextLine()));
+					guilds.add(new GuildCard(sc.next(),name,color,age,sc.nextLine()));
 					
 				}
-				sc.nextLine();
+				
 			}
 		}
+		Collections.shuffle(guilds);
+		for(int x=0;x<5;x++)
+		{
+			cards.add(guilds.get(x));
+		}
 		shuffle();
+		System.out.println(cards.size());
 	}
 	public Card deal()
 	{
