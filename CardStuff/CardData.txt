@@ -1,5 +1,4 @@
 //https://rprod.com/uploads/file/7WONDERS_RULES_US_COLOR.pdf
-//figure out for Forum has 2 options for prereq and how to deal with the spaces in the name
 1 Brown Lumber_Yard 00000000null 1000000 false
 1 Brown Stone_Pit   00000000null 0100000 false
 1 Brown Clay_Pool   00000000null 0001000 false
@@ -52,21 +51,19 @@
 1 Gold East_Trading_Post 00000000null              false false true brownCa 1Co
 1 Gold West_Trading_Post 00000000null              true false false brownCa 1Co
 1 Gold Market_Place      00000000null              true false true grayCa 1Co
-2 Gold Forum             00020000East_Trading_Post false true false cloth glass papyrus
-2 Gold Caravansery       00020000Marketplace       false true false wood stone ore clay
+2 Gold Forum             00020000East_Trading_Post false true false cloth 0C0 glass 0Co papyrus 0Co
+2 Gold Caravansery       00020000Marketplace       false true false wood 0Co stone 0Co ore 0CO clay 0Co
 2 Gold Vineyard          00000000null              true true true brownCa 1Co
-2 Gold Bazar             00000000null              true true true grayCa 2Co
 3 Gold Haven             10101000Forum             false true false brownCa 1Co1VP
 3 Gold Lighthouse        01000100Caravansery       false true false goldCa 1Co1VP
 3 Gold Arena             02100000Dispensary        false true false wTier 3Co1VP
 3 Purple Workers_Guild      11210000null true false true brownCa 1VP
 3 Purple Craftmens_Guild    02200000null true false true greyCa 1VP
 3 Purple Traders_Guild      00001110null true false true goldCa 1VP
-3 Purple Philosophers _uild 00031010null true false true greenCa 1VP
+3 Purple Philosophers_Guild 00031010null true false true greenCa 1VP
 3 Purple Spy_Guild          00030100null true false true redCa 1VP
 3 Purple Strategy_Guild     01201000null true false true milLoss 1VP
 3 Purple Shipowners_Guild   30000110null false true false brownCa 1VP greyCa 1VP purpleCa 1VP
-3 Purple Scientists_Guild   20200010null false true false Math Engi Lit
+3 Purple Scientists_Guild   20200010null false true false Math 0Co Engi 0Co Lit 0Co
 3 Purple Magistrates_Guild  31001000null true false true blueCa 1VP
 3 Purple Builders_Guild     02020100null true true true wTier 1VP
-
