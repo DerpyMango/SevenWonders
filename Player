@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Player
@@ -37,7 +37,7 @@ public class Player
     {
         ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
         hand = (ArrayList<Card>[])(new ArrayList[6]);
-        
+
 
         setCoins(3);
         setMilLosses(0);
@@ -129,10 +129,13 @@ public class Player
 
         if (p != null)
         {
-            for (Card cc : ownedCards[ownedMap.get(c.getType())])
+            for (ArrayList<Card> a : ownedCards)
             {
-                if (cc.getName().equals(p))
-                    return true;
+                for (Card cc : a)
+                {
+                    if (cc.getName().equals(p))
+                        return true;
+                }
             }
         }
 
@@ -141,9 +144,17 @@ public class Player
 
         for (Card cc : ownedCards[ownedMap.get("resource")])
         {
-            for (int i = 0; i < cc.getResources().length; i++)
+            for (int i = 0; i < ((ResourceCard) cc).getResources().length; i++)
             {
-                resources[i] += cc.getResources()[i];
+                resources[i] += ((ResourceCard) cc).getResources()[i];
+            }
+        }
+
+        for (Card cc : ownedCards[ownedMap.get("trade")])
+        {
+            for (int i = 0; i < ((ResourceCard) cc).getResources().length; i++)
+            {
+                resources[i] += ((ResourceCard) cc).getResources()[i];
             }
         }
 
@@ -157,7 +168,7 @@ public class Player
 
         return true;
     }
-    
+
     public boolean canAfford(Cost c)
     {
         int[] costarr = c.getRCost();
@@ -171,9 +182,9 @@ public class Player
             }
         }
 
-        //resources[resources.length - 1] = coins;
+        resources[resources.length - 1] = coins;
 
-        for (int i = 0; i < costarr.length-1; i++)
+        for (int i = 0; i < costarr.length; i++)
         {
             if (resources[i] < costarr[i])
                 return false;
@@ -181,33 +192,31 @@ public class Player
 
         return true;
     }
-    
+
     public boolean buildWonder(Card c)
     {
-    	if (canAfford(/*cost returned by wonderboard*/))
-    		wb.build();
-    	ownedCards[ownedMap.get(c.)]
-    	
+        if (canAfford(/*cost returned by wonderboard*/))
+        {
+            wb.build();
+            ownedCards[ownedMap.get(c.getType())].remove(c);
+            return true;
+        }
+        return false;
     }
 
     public int wondersBuilt()
     {
-    	return wb.numWonders();
+        return wb.numWonders();
     }
 
-
-    public boolean trade(Card c, Player p)
-    {
-        
-    }
 
     public int getMilStrength()
     {
         int ms = 0;
 
-        for (Card c : /*WIP*/)
+        for (Card c : ownedCards[ownedMap.get("military")])
         {
-        	ms += c.getArmyCount();
+            ms += ((MilCard)c).getArmyCount();
         }
 
         return ms;
@@ -215,33 +224,89 @@ public class Player
 
     public int getCivPoints()
     {
-    	
+        int points = 0;
+        for (Card cc : ownedCards[ownedMap.get("civil")])
+        {
+            points += ((CivilCard)cc).getPoints();
+        }
+
+        return points;
     }
 
     public int getScientificPoints()
     {
-    	
+        int points = 0;
+        //Order is Math, Engi, Lit
+        ArrayList<Integer> identicals = new ArrayList<Integer>();
+        for (int i = 0; i < 3; i++)
+        {
+            identicals.add(0);
+        }
+
+        for (Card cc : ownedCards[ownedMap.get("science")])
+        {
+            if (((SciCard) cc).getStatus().equals("Math"))
+            {
+                identicals.set(0, identicals.get(0) + 1);
+            }
+
+            else if (((SciCard) cc).getStatus().equals("Engi"))
+            {
+                identicals.set(1, identicals.get(0) + 1);
+            }
+
+            else if (((SciCard) cc).getStatus().equals("Lit"))
+            {
+                identicals.set(2, identicals.get(0) + 1);
+            }
+        }
+
+        for (int i = identicals.size(); i > -1; i--)
+        {
+            if (identicals.get(i) != 0)
+                points += Math.pow(identicals.get(i), 2);
+            else
+                identicals.remove(i);
+        }
+
+        if (identicals.size() < 3)
+            return points;
+
+        Collections.sort(identicals);
+        points += identicals.get(0) * 7;
+
+        return points;
     }
 
     public int getGuildPoints()
     {
-    	
+
     }
 
     public int getWonderPoints()
     {
-    	
+
     }
 
     public int getCommPoints()
     {
-    	
+
+    }
+
+    public int getMilPoints()
+    {
+        return milVic - milLosses;
+    }
+
+    public int getTreasuryPoints()
+    {
+        return coins % 3;
     }
 
 
     public int calcVP()
     {
-    	
+        return getCivPoints() + getScientificPoints() + getGuildPoints() + getWonderPoints() + getMilPoints() + getTreasuryPoints();
     }
 
 }
