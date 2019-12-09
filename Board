@@ -37,6 +37,7 @@ public class Board {
 				examp = chooseWonderBoard(players.get(i));
 			}
 			System.out.println("sucess");
+			players.get(i).setCoins(3);
 		}
 	}
 	
@@ -74,6 +75,8 @@ public class Board {
 	{
 		currentDeck = decks[age - 1];
 	}
+
+	
 	public int iteratePlayer(int place, int age)
 	{
 		if(age == 1 || age == 3)
@@ -186,6 +189,33 @@ public class Board {
 			System.out.println((i+1)+". player "+(player+1)+" - "+players.get(player).calcVP());
 			players.remove(player);
 		}
-		
+	}
+	public void war(int age)
+	{
+		//compares most of the players
+		for(int x=0;x<players.size()-1;x++)
+		{
+			if(players.get(x).getMilStrength()>players.get(x+1).getMilStrength())
+			{
+				players.get(x).setMilVic(age*2-1);
+				players.get(x+1).setMilLosses(1);
+			}
+			else if(players.get(x).getMilStrength()<players.get(x+1).getMilStrength())
+			{
+				players.get(x+1).setMilVic(age*2-1);
+				players.get(x).setMilLosses(1);
+			}
+		}
+		//compares first and last player
+		if(players.get(0).getMilStrength()>players.get(players.size()-1).getMilStrength())
+		{
+			players.get(0).setMilVic(age*2-1);
+			players.get(players.size()-1).setMilLosses(1);
+		}
+		else if(players.get(0).getMilStrength()<players.get(players.size()-1).getMilStrength())
+		{
+			players.get(players.size()-1).setMilVic(age*2-1);
+			players.get(0).setMilLosses(1);
+		}
 	}
 }
