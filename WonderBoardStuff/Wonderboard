@@ -26,6 +26,9 @@ public abstract class WonderBoard {
 		VictoPoints = new ArrayList();
 		ending = "";
 		temp = 0;
+		setRes();
+		setLoc();
+		addWonders();
 	}
 	
 	public Cost returnWonderCost()
