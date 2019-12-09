@@ -29,6 +29,7 @@ public abstract class WonderBoard {
 		setRes();
 		setLoc();
 		addWonders();
+		create();
 	}
 	
 	public Cost returnWonderCost()
