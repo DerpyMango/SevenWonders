@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Player
 {
-    private int coins, milLosses, milVic;
+    private int coins, milLosses, milVic, leftTradeCost, rightTradeCost;
     private WonderBoard wb;
     private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>();
     {
@@ -16,6 +16,7 @@ public class Player
             ownedMap.put("civil", 4);
             ownedMap.put("guild", 5);
             ownedMap.put("trade", 6);
+            ownedMap.put("wb", 7);
         }
     };
 
@@ -42,6 +43,8 @@ public class Player
         setCoins(3);
         setMilLosses(0);
         setMilVic(0);
+        setLeftTradeCost(2);
+        setRightTradeCost(2);
     }
 
     public int getCoins()
@@ -59,6 +62,16 @@ public class Player
         return milVic;
     }
 
+    public int getLeftTradeCost()
+    {
+        return leftTradeCost;
+    }
+
+    public int getRightTradeCost()
+    {
+        return rightTradeCost;
+    }
+
     public ArrayList<Card>[] getHand()
     {
         return hand;
@@ -69,7 +82,7 @@ public class Player
         return ownedCards;
     }
 
-    private void setCoins(int c)
+    public void setCoins(int c)
     {
         coins = c;
     }
@@ -79,7 +92,7 @@ public class Player
         coins += c;
     }
 
-    private void setMilLosses(int ml)
+    public void setMilLosses(int ml)
     {
         milLosses = ml;
     }
@@ -89,7 +102,7 @@ public class Player
         milLosses += losses;
     }
 
-    private void setMilVic(int mv)
+    public void setMilVic(int mv)
     {
         milVic = mv;
     }
@@ -107,6 +120,16 @@ public class Player
     public void setHand(ArrayList<Card>[] h)
     {
         hand = h;
+    }
+
+    public void setLeftTradeCost(int ltc)
+    {
+        leftTradeCost = ltc;
+    }
+
+    public void setRightTradeCost(int rtc)
+    {
+        rightTradeCost = rtc;
     }
 
     public boolean addToOwnedCards(Card c)
@@ -158,6 +181,14 @@ public class Player
             }
         }
 
+        for (Card cc : ownedCards[ownedMap.get("wb")])
+        {
+            for (int i = 0; i < ((ResourceCard) cc).getResources().length; i++)
+            {
+                resources[i] += ((ResourceCard) cc).getResources()[i];
+            }
+        }
+
         resources[resources.length - 1] = coins;
 
         for (int i = 0; i < costarr.length; i++)
@@ -182,6 +213,22 @@ public class Player
             }
         }
 
+        for (Card cc : ownedCards[ownedMap.get("trade")])
+        {
+            for (int i = 0; i < ((ResourceCard) cc).getResources().length; i++)
+            {
+                resources[i] += ((ResourceCard) cc).getResources()[i];
+            }
+        }
+
+        for (Card cc : ownedCards[ownedMap.get("wb")])
+        {
+            for (int i = 0; i < ((ResourceCard) cc).getResources().length; i++)
+            {
+                resources[i] += ((ResourceCard) cc).getResources()[i];
+            }
+        }
+
         resources[resources.length - 1] = coins;
 
         for (int i = 0; i < costarr.length; i++)
@@ -195,7 +242,7 @@ public class Player
 
     public boolean buildWonder(Card c)
     {
-        if (canAfford(/*cost returned by wonderboard*/))
+        if (canAfford(wb.returnWonderCost()))
         {
             wb.build();
             ownedCards[ownedMap.get(c.getType())].remove(c);
@@ -280,17 +327,24 @@ public class Player
 
     public int getGuildPoints()
     {
-
+        //work in progress
     }
 
     public int getWonderPoints()
     {
-
+        return wb.returnVictoPoints();
     }
 
     public int getCommPoints()
     {
-
+        for (Card c : ownedCards[ownedMap.get("commerce")])
+        {
+            CommCard cc = ((CommCard)c);
+            if (cc.getName().equals("Arena")|| cc.getName().equals("Lighthouse"))
+            {
+                //work in progress
+            }
+        }
     }
 
     public int getMilPoints()
