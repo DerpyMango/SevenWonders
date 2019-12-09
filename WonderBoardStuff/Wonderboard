@@ -28,13 +28,10 @@ public abstract class WonderBoard {
 		temp = 0;
 	}
 	
-	public int[][] returnWonderCost()
+	public Cost returnWonderCost()
 	{
-		int[][] thing = new int[3][8];
-		for(int i = 0; i < list.size(); i++)
-		{
-			thing[i] = list.get(i + 1).getRCost();
-		}
+		Cost thing;
+		thing = list.get(temp + "");
 		return thing;
 	}
 	
