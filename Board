@@ -9,7 +9,7 @@ public class Board {
     private Deck currentDeck;
     private ArrayList<Card> discard;
     private ArrayList<WonderBoard> boards;
-
+    private int age;
     public Board() throws IOException
     {
         players = new ArrayList<Player>();
@@ -41,8 +41,16 @@ public class Board {
             players.get(i).setCoins(3);
         }
         discard = new ArrayList<Card>();
+        age=1;
     }
-
+    public void setAge(int a)
+    {
+    	age = a;
+    }
+    public int getAge()
+    {
+    	return age;
+    }
     public void play()
     {
         // this just does one turn for all the players
@@ -180,13 +188,13 @@ public class Board {
                 System.out.println("Unable to afford trading for this card.");
         }
     }
-    public void setDeck(int age)
+    public void setDeck()
     {
         currentDeck = decks[age - 1];
     }
 
 
-    public int iteratePlayer(int place, int age)
+    public int iteratePlayer(int place)
     {
         if(age == 1 || age == 3)
             if(place == 3)
@@ -200,7 +208,7 @@ public class Board {
                 return --place;
         return -1;
     }
-    public void passDeck(int age)
+    public void passDeck()
     {
         if(age%2==1)
         {
@@ -299,7 +307,7 @@ public class Board {
             players.remove(player);
         }
     }
-    public void war(int age)
+    public void war()
     {
         //compares most of the players
         for(int x=0;x<players.size()-1;x++)
