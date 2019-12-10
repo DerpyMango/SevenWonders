@@ -4,7 +4,8 @@ import java.util.HashMap;
 
 public class Player
 {
-    private int coins, milLosses, milVic, leftTradeCost, rightTradeCost;
+    private int coins, milLosses, milVic;
+    private int[] leftTradeCost, rightTradeCost;
     private WonderBoard wb;
     private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>();
     {
@@ -43,8 +44,13 @@ public class Player
         setCoins(3);
         setMilLosses(0);
         setMilVic(0);
-        setLeftTradeCost(2);
-        setRightTradeCost(2);
+        leftTradeCost = new int[7];
+        rightTradeCost = new int[7];
+        for (int i = 0; i < 7; i++)
+        {
+            leftTradeCost[i] = 2;
+            rightTradeCost[i] = 2;
+        }
     }
 
     public int getCoins()
@@ -62,12 +68,12 @@ public class Player
         return milVic;
     }
 
-    public int getLeftTradeCost()
+    public int[] getLeftTradeCost()
     {
         return leftTradeCost;
     }
 
-    public int getRightTradeCost()
+    public int[] getRightTradeCost()
     {
         return rightTradeCost;
     }
@@ -125,14 +131,53 @@ public class Player
         hand = h;
     }
 
-    public void setLeftTradeCost(int ltc)
+    public void setLeftTradeCost(int[] ltc)
     {
         leftTradeCost = ltc;
     }
 
-    public void setRightTradeCost(int rtc)
+    public void setRightTradeCost(int[] rtc)
     {
         rightTradeCost = rtc;
+    }
+
+    public void discount(boolean left, boolean r)
+    {
+        if (left)
+        {
+            if (r)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    leftTradeCost[i] = 1;
+                }
+            }
+            else
+                for (int i = 4; i < 7; i++)
+                {
+                    leftTradeCost[i] = 1;
+                }
+        }
+        else
+        {
+            if (r)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    rightTradeCost[i] = 1;
+                }
+            }
+            else
+                for (int i = 4; i < 7; i++)
+                {
+                    rightTradeCost[i] = 1;
+                }
+        }
+    }
+
+    public void addTradedCard(Card c)
+    {
+        ownedCards[ownedMap.get("trade")].add(c);
     }
 
     public boolean addToOwnedCards(Card c)
@@ -141,12 +186,38 @@ public class Player
         {
             ownedCards[ownedMap.get(c.getType())].add(c);
             setCoins(coins - c.getCost().getRCost()[c.getCost().getRCost().length - 1]);
+            if (c.getType().equals("commerce"))
+            {
+                if (c.getName().equals("East Trading Post"))
+                    discount(false, true);
+                else if (c.getName().equals("West Trading Post"))
+                    discount(true, true);
+                else if (c.getName().equals("Market Place"))
+                {
+                    discount(true, false);
+                    discount(false, false);
+                }
+                else if (c.getName().equals("Vineyard") || c.getName().equals("Haven"))
+                {
+                    for (Card a : ownedCards[ownedMap.get("resource")])
+                    {
+                        if (a.getColor().equals("Brown"))
+                            addCoins(1);
+                    }
+                }
+                else if (c.getName().equals("Lighthouse"))
+                {
+                    addCoins(ownedCards[ownedMap.get("commerce")].size());
+                }
+                else if (c.getName().equals("Arena"))
+                {
+                    addCoins(3 * wb.numWonders());
+                }
+            }
             return true;
         }
-
         else
             return false;
-
     }
 
     public boolean canAfford(Card c)
@@ -334,215 +405,215 @@ public class Player
         ArrayList<Card>[] ownedLeft,ownedRight;
         for (Card c : ownedCards[ownedMap.get("guild")])
         {
-        	GuildCard cc = ((GuildCard)c);
-        	if(cc.getName().equals("Scientists Guild"))
-        		points+=0;
-        	else if(cc.getName().equals("Workers Guild"))
-        	{
-        		if(self-1<0)
-        		{
-        			ownedLeft= players.get(players.size()).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(0).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
-        		}
-        		else
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
-        		}
-        	}
-        	else if(cc.getName().equals("Craftsmen Guild"))
-        	{
-        		if(self-1<0)
-        		{
-        			ownedLeft= players.get(players.size()).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(0).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
-        		}
-        		else
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
-        		}
-        	}
-        	else if(cc.getName().equals("Traders Guild"))
-        	{
-        		if(self-1<0)
-        		{
-        			ownedLeft= players.get(players.size()).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("commerce")].size()+ownedRight[ownedMap.get("commerce")].size();
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(0).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("commerce")].size()+ownedRight[ownedMap.get("commerce")].size();
-        		}
-        		else
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("commerce")].size()+ownedRight[ownedMap.get("commerce")].size();
-        		}
-        	}
-        	else if(cc.getName().equals("Philosophers Guild"))
-        	{
-        		if(self-1<0)
-        		{
-        			ownedLeft= players.get(players.size()).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("science")].size()+ownedRight[ownedMap.get("science")].size();
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(0).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("science")].size()+ownedRight[ownedMap.get("science")].size();
-        		}
-        		else
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("science")].size()+ownedRight[ownedMap.get("science")].size();
-        		}
-        	}
-        	else if(cc.getName().equals("Spy Guild"))
-        	{
-        		if(self-1<0)
-        		{
-        			ownedLeft= players.get(players.size()).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("military")].size()+ownedRight[ownedMap.get("military")].size();
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(0).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("military")].size()+ownedRight[ownedMap.get("military")].size();
-        		}
-        		else
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("military")].size()+ownedRight[ownedMap.get("military")].size();
-        		}
-        	}
-        	else if(cc.getName().equals("Strategy Guild"))
-        	{
-        		int left,right;
-        		if(self-1<0)
-        		{
-        			left = players.get(players.size()).getMilLosses();
-        			right = players.get(self+1).getMilLosses();
-        			points+=left+right;
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			left= players.get(self-1).getMilLosses();
-        			right= players.get(0).getMilLosses();
-        			points+=left+right;
-        		}
-        		else
-        		{
-        			left= players.get(self-1).getMilLosses();
-        			right= players.get(self+1).getMilLosses();
-        			points+=left+right;
-        		}
-        	}
-        	else if(cc.getName().equals("Shipowners Guild"))
-        	{
-        		points+=ownedCards[ownedMap.get("resource")].size()+ownedCards[ownedMap.get("guild")].size();
-        	}
-        	else if(cc.getName().equals("Magistrates Guild"))
-        	{
-        		if(self-1<0)
-        		{
-        			ownedLeft= players.get(players.size()).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("civil")].size()+ownedRight[ownedMap.get("civil")].size();
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(0).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("civil")].size()+ownedRight[ownedMap.get("civil")].size();
-        		}
-        		else
-        		{
-        			ownedLeft= players.get(self-1).getOwnedCards();
-        			ownedRight= players.get(self+1).getOwnedCards();
-        			points+=ownedLeft[ownedMap.get("civil")].size()+ownedRight[ownedMap.get("civil")].size();
-        		}
-        	}
-        	else
-        	{
-        		int left,right;
-        		if(self-1<0)
-        		{
-        			left= players.get(players.size()).getWonderBoard().numWonders();
-        			right= players.get(self+1).getWonderBoard().numWonders();
-        			points+=left+right;
-        		}
-        		else if(self+1>=players.size())
-        		{
-        			left= players.get(self-1).getWonderBoard().numWonders();
-        			right= players.get(0).getWonderBoard().numWonders();
-        			points+=left+right;
-        		}
-        		else
-        		{
-        			left= players.get(self-1).getWonderBoard().numWonders();
-        			right= players.get(self+1).getWonderBoard().numWonders();
-        			points+=left+right;
-        		}
-        	}
+            GuildCard cc = ((GuildCard)c);
+            if(cc.getName().equals("Scientists Guild"))
+                points+=0;
+            else if(cc.getName().equals("Workers Guild"))
+            {
+                if(self-1<0)
+                {
+                    ownedLeft= players.get(players.size()).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
+                }
+                else if(self+1>=players.size())
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(0).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
+                }
+                else
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
+                }
+            }
+            else if(cc.getName().equals("Craftsmen Guild"))
+            {
+                if(self-1<0)
+                {
+                    ownedLeft= players.get(players.size()).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
+                }
+                else if(self+1>=players.size())
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(0).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
+                }
+                else
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("resource")].size()+ownedRight[ownedMap.get("resource")].size();
+                }
+            }
+            else if(cc.getName().equals("Traders Guild"))
+            {
+                if(self-1<0)
+                {
+                    ownedLeft= players.get(players.size()).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("commerce")].size()+ownedRight[ownedMap.get("commerce")].size();
+                }
+                else if(self+1>=players.size())
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(0).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("commerce")].size()+ownedRight[ownedMap.get("commerce")].size();
+                }
+                else
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("commerce")].size()+ownedRight[ownedMap.get("commerce")].size();
+                }
+            }
+            else if(cc.getName().equals("Philosophers Guild"))
+            {
+                if(self-1<0)
+                {
+                    ownedLeft= players.get(players.size()).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("science")].size()+ownedRight[ownedMap.get("science")].size();
+                }
+                else if(self+1>=players.size())
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(0).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("science")].size()+ownedRight[ownedMap.get("science")].size();
+                }
+                else
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("science")].size()+ownedRight[ownedMap.get("science")].size();
+                }
+            }
+            else if(cc.getName().equals("Spy Guild"))
+            {
+                if(self-1<0)
+                {
+                    ownedLeft= players.get(players.size()).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("military")].size()+ownedRight[ownedMap.get("military")].size();
+                }
+                else if(self+1>=players.size())
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(0).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("military")].size()+ownedRight[ownedMap.get("military")].size();
+                }
+                else
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("military")].size()+ownedRight[ownedMap.get("military")].size();
+                }
+            }
+            else if(cc.getName().equals("Strategy Guild"))
+            {
+                int left,right;
+                if(self-1<0)
+                {
+                    left = players.get(players.size()).getMilLosses();
+                    right = players.get(self+1).getMilLosses();
+                    points+=left+right;
+                }
+                else if(self+1>=players.size())
+                {
+                    left= players.get(self-1).getMilLosses();
+                    right= players.get(0).getMilLosses();
+                    points+=left+right;
+                }
+                else
+                {
+                    left= players.get(self-1).getMilLosses();
+                    right= players.get(self+1).getMilLosses();
+                    points+=left+right;
+                }
+            }
+            else if(cc.getName().equals("Shipowners Guild"))
+            {
+                points+=ownedCards[ownedMap.get("resource")].size()+ownedCards[ownedMap.get("guild")].size();
+            }
+            else if(cc.getName().equals("Magistrates Guild"))
+            {
+                if(self-1<0)
+                {
+                    ownedLeft= players.get(players.size()).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("civil")].size()+ownedRight[ownedMap.get("civil")].size();
+                }
+                else if(self+1>=players.size())
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(0).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("civil")].size()+ownedRight[ownedMap.get("civil")].size();
+                }
+                else
+                {
+                    ownedLeft= players.get(self-1).getOwnedCards();
+                    ownedRight= players.get(self+1).getOwnedCards();
+                    points+=ownedLeft[ownedMap.get("civil")].size()+ownedRight[ownedMap.get("civil")].size();
+                }
+            }
+            else
+            {
+                int left,right;
+                if(self-1<0)
+                {
+                    left= players.get(players.size()).getWonderBoard().numWonders();
+                    right= players.get(self+1).getWonderBoard().numWonders();
+                    points+=left+right;
+                }
+                else if(self+1>=players.size())
+                {
+                    left= players.get(self-1).getWonderBoard().numWonders();
+                    right= players.get(0).getWonderBoard().numWonders();
+                    points+=left+right;
+                }
+                else
+                {
+                    left= players.get(self-1).getWonderBoard().numWonders();
+                    right= players.get(self+1).getWonderBoard().numWonders();
+                    points+=left+right;
+                }
+            }
         }
         return points;
     }
 
     public int getWonderPoints()
     {
-        return wb.returnVictoPoints();
+        return wb.getVictoPoints();
     }
 
     public int getCommPoints()
     {
         int points =0;
-    	for (Card c : ownedCards[ownedMap.get("commerce")])
+        for (Card c : ownedCards[ownedMap.get("commerce")])
         {
             CommCard cc = ((CommCard)c);
             if (cc.getName().equals("Arena")|| cc.getName().equals("Lighthouse")|| cc.getName().equals("Haven"))
             {
                 if(cc.getEffect().getRewards().containsValue("1VP")&&cc.getEffect().getRewards().containsKey("wTier"))
                 {
-                	points+=wb.numWonders();
+                    points+=wb.numWonders();
                 }
                 else if(cc.getEffect().getRewards().containsValue("1VP")&&cc.getEffect().getRewards().containsKey("brownCa"))
                 {
-                	points+=ownedCards[ownedMap.get("resource")].size();
+                    points+=ownedCards[ownedMap.get("resource")].size();
                 }
                 else if(cc.getEffect().getRewards().containsValue("1VP")&&cc.getEffect().getRewards().containsKey("goldCa"))
                 {
-                	points+=ownedCards[ownedMap.get("commerce")].size();
+                    points+=ownedCards[ownedMap.get("commerce")].size();
                 }
             }
         }
-    	return points;
+        return points;
     }
 
     public int getMilPoints()
