@@ -64,7 +64,8 @@ public class Board {
 				Card cc = hand[row].remove(col);
 				if(!players.get(x).addToOwnedCards(cc))
 				{
-					trade()
+					//need to finish what happens if cant afford
+					trade();
 				}
 			}
 			else if(in==2)
@@ -75,6 +76,7 @@ public class Board {
 				int row = sc.nextInt();
 				int col = sc.nextInt();
 				hand[row].remove(col);
+				//need to do the part f you can afford to build it or not
 				players.get(x).getWonderBoard().build();
 			}
 			else
@@ -87,6 +89,22 @@ public class Board {
 				discard.add(hand[row].remove(col));
 				players.get(x).addCoins(3);
 			}
+		}
+	}
+	public void discardAll()
+	{
+		ArrayList<Card>[] hand;
+		int row=0;
+		for(int x=0;x<players.size();x++)
+		{
+			hand = players.get(x).getHand();
+			for(int y=0;y<hand.length;y++)
+				if(hand[y].size()!=0)
+				{
+					row=y;
+				}
+			discard.add(hand[row].remove(0));
+			players.get(x).addCoins(3);
 		}
 	}
 	public void trade(Player home,Player trading,int resource)
