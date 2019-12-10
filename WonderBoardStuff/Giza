@@ -1,25 +1,39 @@
-
 public class Giza extends WonderBoard
 {
 
-	public void setRes() {
-		resource = "Metal";
-	}
+    public void setRes() {
+        resource = "Metal";
+    }
 
-	public void setLoc() {
-		location = "The Pyramids of Giza";
-	}
+    public void setLoc() {
+        location = "The Pyramids of Giza";
+    }
 
-	public void addWonders() {
-		list.put("3", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-		list.put("5", new Cost(new int[] {3, 0, 0, 0, 0, 0, 0, 0}, ""));
-		list.put("7", new Cost(new int[] {0, 4, 0, 0, 0, 0, 0, 0}, ""));
-	}
+    public void addWonders() {
+        list.put("3", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put("5", new Cost(new int[] {3, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put("7", new Cost(new int[] {0, 4, 0, 0, 0, 0, 0, 0}, ""));
+    }
 
-	public void build() {
-		String thing = (String) iter.next();
-		temp++;
-		VictoPoints.add(thing);
-	}
-	
+    public void build() {
+        String thing = (String) iter.next();
+        temp++;
+        VictoPoints.add(thing);
+    }
+
+    public int getVictoPoints()
+    {
+        if (VictoPoints.size() < 1)
+            return 0;
+        else
+        {
+            int j = 3;
+            for (int i = 1; i < VictoPoints.size(); i++)
+            {
+                j += 2;
+            }
+            return j;
+        }
+    }
+
 }
