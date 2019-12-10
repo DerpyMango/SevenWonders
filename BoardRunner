@@ -1,2 +1,7 @@
 //calls on play method 7 times an age, at the end of age it does war, then at end of game it does calcwinner
 //make it worked text based and liam can do the magicks to make it work graphically
+
+public BoardRunner
+{
+  public static void main
+}
