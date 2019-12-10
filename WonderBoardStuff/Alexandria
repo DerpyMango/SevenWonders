@@ -1,32 +1,40 @@
-
 public class Alexandria extends WonderBoard
 {
 
-	public void setRes() {
-		resource = "Cloth";
-	}
+    public void setRes() {
+        resource = "Cloth";
+    }
 
-	public void setLoc() {
-		location = "The Lighthouse of Alexandria";
-	}
+    public void setLoc() {
+        location = "The Lighthouse of Alexandria";
+    }
 
-	public void addWonders() {
-		list.put("7", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-		list.put("c/o/w/m", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-		list.put("3", new Cost(new int[] {0, 0, 0, 0, 0, 2, 0, 0}, ""));
-	}
+    public void addWonders() {
+        list.put("7", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put("c/o/w/m", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put("3", new Cost(new int[] {0, 0, 0, 0, 0, 2, 0, 0}, ""));
+    }
 
-	public void build() {
-		String thing = (String)iter.next();
-		temp++;
-		if(thing.contains("c"))
-		{
-			ending += thing + "\\";
-		}
-		else
-		{
-			VictoPoints.add(thing);
-		}
-	}
-	
+    public void build() {
+        String thing = (String)iter.next();
+        temp++;
+        if(thing.contains("c"))
+        {
+            ending += thing + "\\";
+        }
+        else
+        {
+            VictoPoints.add(thing);
+        }
+    }
+
+    public int getVictoPoints()
+    {
+        if (VictoPoints.size() > 2)
+            return 10;
+        else if (VictoPoints.size() >= 1)
+            return 3;
+        return 0;
+    }
+
 }
