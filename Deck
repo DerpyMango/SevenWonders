@@ -55,13 +55,16 @@ public class Deck
 				
 			}
 		}
-		Collections.shuffle(guilds);
-		for(int x=0;x<5;x++)
+		if(age==3)
 		{
-			cards.add(guilds.get(x));
+			Collections.shuffle(guilds);
+			for(int x=0;x<5;x++)
+			{
+				cards.add(guilds.get(x));
+			}
 		}
+		
 		shuffle();
-		System.out.println(cards.size());
 	}
 	public Card deal()
 	{
