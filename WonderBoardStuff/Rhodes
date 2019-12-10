@@ -1,30 +1,38 @@
-
 public class Rhodes extends WonderBoard
 {
 
-	public void setRes() {
-		resource = "Ore";
-	}
+    public void setRes() {
+        resource = "Ore";
+    }
 
-	public void setLoc() {
-		location = "The Colossus of Rhodes";
-	}
+    public void setLoc() {
+        location = "The Colossus of Rhodes";
+    }
 
-	public void addWonders() {
-		list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
-		list.put("2 A", new Cost(new int[] {0, 0, 0, 3, 0, 0, 0, 0}, ""));
-		list.put("7", new Cost(new int[] {0, 0, 4, 0, 0, 0, 0, 0}, ""));
-	}
+    public void addWonders() {
+        list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put("2 A", new Cost(new int[] {0, 0, 0, 3, 0, 0, 0, 0}, ""));
+        list.put("7", new Cost(new int[] {0, 0, 4, 0, 0, 0, 0, 0}, ""));
+    }
 
-	public void build() {
-		String thing = (String)iter.next();
-		temp++;
-		if(thing.contains("A"))
-			army += thing + "\\";
-		else
-		{
-			VictoPoints.add(thing);
-		}
-	}
-	
+    public void build() {
+        String thing = (String)iter.next();
+        temp++;
+        if(thing.contains("A"))
+            army += thing + "\\";
+        else
+        {
+            VictoPoints.add(thing);
+        }
+    }
+
+    public int getVictoPoints()
+    {
+        if (VictoPoints.size() > 2)
+            return 10;
+        else if (VictoPoints.size() >= 1)
+            return 3;
+        return 0;
+    }
+
 }
