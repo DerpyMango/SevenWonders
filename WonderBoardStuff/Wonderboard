@@ -5,80 +5,82 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public abstract class WonderBoard {
-	
-	protected String location;
-	protected HashMap<String, Cost> list;
-	protected String resource;
-	protected ArrayList VictoPoints;
-	protected String ending;
-	protected Iterator iter;
-	protected int temp;
-	protected String army;
-	protected String pay;
-	protected String coins;
-	
-	public WonderBoard()
-	{
-		coins = "0";
-		pay = "";
-		army = "";
-		list = new HashMap<String, Cost>();
-		VictoPoints = new ArrayList();
-		ending = "";
-		temp = 0;
-		setRes();
-		setLoc();
-		addWonders();
-		create();
-	}
-	
-	public Cost returnWonderCost()
-	{
-		Cost thing;
-		thing = list.get(temp + "");
-		return thing;
-	}
-	
-	public abstract void setRes();
-	
-	public int coins()
-	{
-		return Integer.parseInt(coins);
-	}
-	
-	public String checkPay()
-	{
-		return pay;
-	}
-	
-	public String getArmy()
-	{
-		return army;
-	}
-	
-	public abstract void setLoc();
-	
-	public void create()
-	{
-		iter = list.entrySet().iterator();
-	}
-	
-	public int numWonders()
-	{
-		return temp;
-	}
-	
-	public String getLoc()
-	{
-		return location;
-	}
-	
-	public abstract void addWonders();
-	
-	public abstract void build();
-	
-	public String getEnd()
-	{
-		return ending;
-	}
+
+    protected String location;
+    protected HashMap<String, Cost> list;
+    protected String resource;
+    protected ArrayList VictoPoints;
+    protected String ending;
+    protected Iterator iter;
+    protected int temp;
+    protected String army;
+    protected String pay;
+    protected String coins;
+
+    public WonderBoard()
+    {
+        coins = "0";
+        pay = "";
+        army = "";
+        list = new HashMap<String, Cost>();
+        VictoPoints = new ArrayList();
+        ending = "";
+        temp = 0;
+        setRes();
+        setLoc();
+        addWonders();
+        create();
+    }
+
+    public Cost returnWonderCost()
+    {
+        Cost thing;
+        thing = list.get(temp + "");
+        return thing;
+    }
+
+    public abstract void setRes();
+
+    public int coins()
+    {
+        return Integer.parseInt(coins);
+    }
+
+    public String checkPay()
+    {
+        return pay;
+    }
+
+    public String getArmy()
+    {
+        return army;
+    }
+
+    public abstract void setLoc();
+
+    public void create()
+    {
+        iter = list.entrySet().iterator();
+    }
+
+    public int numWonders()
+    {
+        return temp;
+    }
+
+    public String getLoc()
+    {
+        return location;
+    }
+
+    public abstract void addWonders();
+
+    public abstract void build();
+
+    public abstract int getVictoPoints();
+
+    public String getEnd()
+    {
+        return ending;
+    }
 }
