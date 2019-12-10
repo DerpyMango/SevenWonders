@@ -7,7 +7,8 @@ public class Board {
 	private ArrayList<Player> players;
 	private Deck[] decks;
 	private Deck currentDeck;
-	private ArrayList<Wonderboard> boards;
+	private ArrayList<Card> discard;
+	private ArrayList<WonderBoard> boards;
 	
 	public Board() throws IOException
 	{
@@ -21,7 +22,7 @@ public class Board {
 		{
 			decks[i] = new Deck(i+1);
 		}
-		boards = new ArrayList<Wonderboard>();
+		boards = new ArrayList<WonderBoard>();
 		boards.add(new Alexandria());
 		boards.add(new Babylon());
 		boards.add(new Ephesos());
@@ -39,6 +40,7 @@ public class Board {
 			System.out.println("sucess");
 			players.get(i).setCoins(3);
 		}
+		discard = new ArrayList<Card>();
 	}
 	
 	public void play()
@@ -56,14 +58,34 @@ public class Board {
 			{
 				hand = players.get(x).getHand();
 				System.out.println(hand.toString());
+				System.out.println("Input the coordinate of the card you want to use to build wonder");
+				int row = sc.nextInt();
+				int col = sc.nextInt();
+				Card cc = hand[row].remove(col);
+				if(!players.get(x).addToOwnedCards(cc))
+				{
+					trade()
+				}
 			}
 			else if(in==2)
 			{
 				hand = players.get(x).getHand();
+				System.out.println(hand.toString());
+				System.out.println("Input the coordinate of the card you want to use to build wonder");
+				int row = sc.nextInt();
+				int col = sc.nextInt();
+				hand[row].remove(col);
+				players.get(x).getWonderBoard().build();
 			}
 			else
 			{
 				hand = players.get(x).getHand();
+				System.out.println(hand.toString());
+				System.out.println("Input the coordinate of the card you want to remove");
+				int row = sc.nextInt();
+				int col = sc.nextInt();
+				discard.add(hand[row].remove(col));
+				players.get(x).addCoins(3);
 			}
 		}
 	}
@@ -173,20 +195,20 @@ public class Board {
 	}
 	public void calcWinner()
 	{
-		int high = players.get(0).calcVP();
+		int high = players.get(0).calcVP(players,0);
 		int player=0;
 		System.out.println("Final Ranking");
 		for(int i=0;i<players.size();i++)
 		{
 			for(int x=0;x<players.size();x++)
 			{
-				if(players.get(x).calcVP()>high)
+				if(players.get(x).calcVP(players,x)>high)
 				{
-					high = players.get(x).calcVP();
+					high = players.get(x).calcVP(players,x);
 					player =x;
 				}
 			}
-			System.out.println((i+1)+". player "+(player+1)+" - "+players.get(player).calcVP());
+			System.out.println((i+1)+". player "+(player+1)+" - "+players.get(player).calcVP(players,player));
 			players.remove(player);
 		}
 	}
