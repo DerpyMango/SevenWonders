@@ -26,13 +26,13 @@ public class Board {
             decks[i] = new Deck(i+1);
         }
         boards = new ArrayList<WonderBoard>();
-        boards.add(new Alexandria());
-        boards.add(new Babylon());
+        //boards.add(new Alexandria());
+        //boards.add(new Babylon());
         boards.add(new Ephesos());
         boards.add(new Giza());
-        boards.add(new Halicarnassus());
+        //boards.add(new Halicarnassus());
         boards.add(new Rhodes());
-        boards.add(new Zeus());
+        //boards.add(new Zeus());
         for(int i = 0; i < players.size(); i++)
         {
             String examp = "not";
@@ -40,7 +40,7 @@ public class Board {
             {
                 examp = chooseWonderBoard(players.get(i));
             }
-            System.out.println("Sucessfully chosen");
+            System.out.println(examp + " sucessfully chosen");
             players.get(i).setCoins(3);
 
         }
@@ -66,12 +66,14 @@ public class Board {
         for(int x=0;x<players.size();x++)
         {
             System.out.println(players.get(x));
+            System.out.print("Hand : ");
+            players.get(x).printHand();
             System.out.println("Input your move "+players.get(x).getWonderBoard()+"(1 Build Card,2 Build Wonder,3 Discard Card)");
             in = sc.nextInt();
             if(in==1)
             {
                 hand = players.get(x).getHand();
-                players.get(x).printHand();
+                //players.get(x).printHand();
                 System.out.println("Input the index of the card you want to build");
                 int row = sc.nextInt();
                 Card cc = hand.remove(row);
@@ -138,7 +140,7 @@ public class Board {
                 c.add(currentDeck.deal());
             }
             players.get(x).setHand(c);
-            System.out.println(players.get(x).getHand().size());
+            //System.out.println(players.get(x).getHand().size());
         }
     }
     public void discardAll()
@@ -268,8 +270,14 @@ public class Board {
     }
     public String chooseWonderBoard(Player player)
     {
-
-        Scanner kb = new Scanner(System.in);
+        //for (int i = 0; i < 3; i++)
+        //{
+        int index = (int) Math.random() * boards.size();
+        player.setWonderBoard(boards.get(index));
+        boards.remove(index);
+        return player.getWonderBoard().location;
+        //}
+        /*Scanner kb = new Scanner(System.in);
         for(int i = 0; i < boards.size(); i++)
         {
             System.out.print(boards.get(i) + "\t");
@@ -337,7 +345,7 @@ public class Board {
             System.out.println("Pick Again");
             return "not";
         }
-
+*/
     }
     public void calcWinner()
     {
