@@ -36,5 +36,8 @@ public class Alexandria extends WonderBoard
             return 3;
         return 0;
     }
-
+    public String toString()
+    {
+    	return "Alexandria";
+    }
 }
