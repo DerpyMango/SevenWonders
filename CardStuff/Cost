@@ -26,4 +26,13 @@ public class Cost
 		}
 		System.out.println("Prerequisite Cost: "+prerequisite);
 	}
+	public String toString()
+	{
+		String r="Cost:: ";
+		for(int x=0;x<resourceCost.length;x++)
+		{
+			r+=resources[x]+": "+resourceCost[x]+" ";
+		}
+		return r;
+	}
 }
