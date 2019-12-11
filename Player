@@ -659,7 +659,7 @@ public class Player
 
     public int getTreasuryPoints()
     {
-        return coins % 3;
+        return coins / 3;
     }
 
 
