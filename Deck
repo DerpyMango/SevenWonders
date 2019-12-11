@@ -66,6 +66,10 @@ public class Deck
 		
 		shuffle();
 	}
+	public int size()
+	{
+		return cards.size();
+	}
 	public Card deal()
 	{
 		return cards.remove(0);
