@@ -1,38 +1,42 @@
-public class Cost 
+public class Cost
 {
-	private static final String[] resources = {"wood","stone","ore","clay","cloth","glass","papyrus","coins"};
-	private int[] resourceCost;
-	private String prerequisite;
-	//order of resources is wood,stone,ore,clay,cloth,glass,papyrus
-	public Cost(int[] rc, String p)
-	{
-		resourceCost = rc;
-		prerequisite = p;
-	}
-	public int[] getRCost()
-	{
-		return resourceCost;
-	}
-	public String getPrereq()
-	{
-		return prerequisite;
-	}
-	public void print()
-	{
-		System.out.print("Cost: ");
-		for(int x=0;x<8;x++)
-		{
-			System.out.print(resources[x]+": "+resourceCost[x]+" ");
-		}
-		System.out.println("Prerequisite Cost: "+prerequisite);
-	}
-	public String toString()
-	{
-		String r="Cost:: ";
-		for(int x=0;x<resourceCost.length;x++)
-		{
-			r+=resources[x]+": "+resourceCost[x]+" ";
-		}
-		return r;
-	}
+    private static final String[] resources = {"wood","stone","ore","clay","cloth","glass","papyrus","coins"};
+    private int[] resourceCost;
+    private String prerequisite;
+    //order of resources is wood,stone,ore,clay,cloth,glass,papyrus
+    public Cost(int[] rc, String p)
+    {
+        resourceCost = rc;
+        prerequisite = p;
+    }
+    public int[] getRCost()
+    {
+        return resourceCost;
+    }
+    public String getPrereq()
+    {
+        return prerequisite;
+    }
+    public void print()
+    {
+        System.out.print("Cost: ");
+        for(int x=0;x<8;x++)
+        {
+            System.out.print(resources[x]+": "+resourceCost[x]+" ");
+        }
+        System.out.println("Prerequisite Cost: "+prerequisite);
+    }
+
+    public String toString()
+    {
+        String ts = "";
+        for (int i = 0; i < resourceCost.length; i++)
+        {
+            if (resourceCost[i] > 0)
+            {
+                ts += resourceCost[i] + " " + resources[i] +" ";
+            }
+        }
+        return ts;
+    }
 }
