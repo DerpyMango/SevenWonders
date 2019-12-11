@@ -77,6 +77,8 @@ public abstract class WonderBoard {
 
     public abstract void build();
 
+    public abstract String toString();
+    
     public abstract int getVictoPoints();
 
     public String getEnd()
