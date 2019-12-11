@@ -1,7 +1,19 @@
-//calls on play method 7 times an age, at the end of age it does war, then at end of game it does calcwinner
-//make it worked text based and liam can do the magicks to make it work graphically
+import java.io.IOException;
 
-public BoardRunner
+public class BoardRunner 
 {
-  public static void main
+	public static void main(String[]args) throws IOException
+	{
+		Board board = new Board();
+		for(int x=0;x<3;x++)
+		{
+			board.setAge(x+1);
+			for(int y=0;y<7;y++)
+			{
+				board.play();
+			}
+			board.war();
+		}
+		board.calcWinner();
+	}
 }
