@@ -8,7 +8,6 @@ public class Player
     private int[] leftTradeCost, rightTradeCost;
     private int warBoost;
     private WonderBoard wb;
-    
     private static final HashMap<String, Integer> ownedMap = new HashMap<String, Integer>();
     {
         {
@@ -35,13 +34,17 @@ public class Player
         }
     };
 
-    private ArrayList<Card>[] ownedCards, hand;
+    private ArrayList<Card>[] ownedCards;
+    private ArrayList<Card> hand;
 
     public Player()
     {
-        ownedCards = (ArrayList<Card>[])(new ArrayList[7]);
-        hand = (ArrayList<Card>[])(new ArrayList[6]);
-
+        ownedCards = (ArrayList<Card>[])(new ArrayList[8]);
+        hand = new ArrayList<Card>();
+        for(int x=0;x<8;x++)
+        {
+        	ownedCards[x] = new ArrayList<Card>();
+        }
         setCoins(3);
         setMilLosses(0);
         setMilVic(0);
@@ -80,7 +83,7 @@ public class Player
         return rightTradeCost;
     }
 
-    public ArrayList<Card>[] getHand()
+    public ArrayList<Card> getHand()
     {
         return hand;
     }
@@ -128,11 +131,19 @@ public class Player
         wb = w;
     }
 
-    public void setHand(ArrayList<Card>[] h)
+    public void setHand(ArrayList<Card> h)
     {
         hand = h;
     }
-
+    public void printHand()
+    {
+    	for(Card cc:hand)
+        {
+        	System.out.print(cc.getName()+" "+cc.getCost()+", ");
+        }
+    	System.out.println();
+    	
+    }
     public void setLeftTradeCost(int[] ltc)
     {
         leftTradeCost = ltc;
@@ -176,7 +187,7 @@ public class Player
                 }
         }
     }
-
+    
     public void addTradedCard(Card c)
     {
         ownedCards[ownedMap.get("trade")].add(c);
@@ -230,11 +241,15 @@ public class Player
         {
             for (ArrayList<Card> a : ownedCards)
             {
-                for (Card cc : a)
+                if(!a.isEmpty())
                 {
-                    if (cc.getName().equals(p))
-                        return true;
+                	for (Card cc : a)
+                    {
+                        if (cc.getName().equals(p))
+                            return true;
+                    }
                 }
+            	
             }
         }
 
@@ -324,7 +339,7 @@ public class Player
             ownedCards[ownedMap.get(c.getType())].remove(c);
             if (wb.location.equals("The Temple of Artemis at Ephesus") && )
             	addCoins(9);
-            else if (wb.location.contentEquals("))
+            else if (wb.location.contentEquals(""))
             //work in progress
             return true;
         }
@@ -388,7 +403,7 @@ public class Player
             }
         }
 
-        for (int i = identicals.size(); i > -1; i--)
+        for (int i = identicals.size()-1; i > -1; i--)
         {
             if (identicals.get(i) != 0)
                 points += Math.pow(identicals.get(i), 2);
