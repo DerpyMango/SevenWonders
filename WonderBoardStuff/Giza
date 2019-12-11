@@ -35,5 +35,8 @@ public class Giza extends WonderBoard
             return j;
         }
     }
-
+    public String toString()
+    {
+    	return "Giza";
+    }
 }
