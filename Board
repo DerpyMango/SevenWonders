@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -10,6 +11,8 @@ public class Board {
     private ArrayList<Card> discard;
     private ArrayList<WonderBoard> boards;
     private int age;
+    private ArrayList<String> places = new ArrayList<String>(Arrays.asList("Alexandria","Babylon","Ephesos","Giza","Halicarnassus","Rhodes","Zeus"));
+	private ArrayList<String> picked = new ArrayList<String>();
     public Board() throws IOException
     {
         players = new ArrayList<Player>();
@@ -37,8 +40,9 @@ public class Board {
             {
                 examp = chooseWonderBoard(players.get(i));
             }
-            System.out.println("sucess");
+            System.out.println("Sucessfully chosen");
             players.get(i).setCoins(3);
+            
         }
         discard = new ArrayList<Card>();
         age=1;
@@ -46,6 +50,7 @@ public class Board {
     public void setAge(int a)
     {
     	age = a;
+    	currentDeck = decks[a-1];
     }
     public int getAge()
     {
@@ -57,19 +62,18 @@ public class Board {
         // the boardRunner will call on this method several times an age
         int in;
         Scanner sc = new Scanner(System.in);
-        ArrayList<Card>[] hand;
+        ArrayList<Card> hand;
         for(int x=0;x<players.size();x++)
         {
-            System.out.println("Input your move (1 Build Card,2 Build Wonder,3 Discard Card)");
+            System.out.println("Input your move "+players.get(x).getWonderBoard()+"(1 Build Card,2 Build Wonder,3 Discard Card)");
             in = sc.nextInt();
             if(in==1)
             {
-                hand = players.get(x).getHand();
-                System.out.println(hand.toString());
-                System.out.println("Input the coordinate of the card you want to build");
+            	hand = players.get(x).getHand();
+                players.get(x).printHand();
+                System.out.println("Input the index of the card you want to build");
                 int row = sc.nextInt();
-                int col = sc.nextInt();
-                Card cc = hand[row].remove(col);
+                Card cc = hand.remove(row);
                 while(!players.get(x).addToOwnedCards(cc))
                 {
                     //need to finish what happens if cant afford
@@ -82,45 +86,57 @@ public class Board {
                     else
                         System.out.println("Exiting trading.");
 
-                    }
-                }
+                 }
+              }
 
             else if(in==2)
             {
-                hand = players.get(x).getHand();
-                System.out.println(hand.toString());
-                System.out.println("Input the coordinate of the card you want to use to build wonder");
+            	hand = players.get(x).getHand();
+                players.get(x).printHand();
+                System.out.println("Input the index of the card you want to use to build a wonder");
                 int row = sc.nextInt();
-                int col = sc.nextInt();
-                hand[row].remove(col);
+                hand.remove(row);
                 //need to do the part f you can afford to build it or not
                 players.get(x).getWonderBoard().build();
             }
             else
             {
                 hand = players.get(x).getHand();
-                System.out.println(hand.toString());
-                System.out.println("Input the coordinate of the card you want to remove");
+                players.get(x).printHand();
+                System.out.println("Input the index of the card you want to remove");
                 int row = sc.nextInt();
-                int col = sc.nextInt();
-                discard.add(hand[row].remove(col));
+                discard.add(hand.remove(row));
                 players.get(x).addCoins(3);
             }
         }
     }
+    public void dealCards()
+    {
+    	ArrayList<Card> c = new ArrayList<Card>();
+    	for(int x=0;x<players.size();x++)
+    	{
+    		c = new ArrayList<Card>();
+    		for(int y=0;y<7;y++)
+    		{
+    			c.add(currentDeck.deal());
+    		}
+    		players.get(x).setHand(c);
+    		System.out.println(players.get(x).getHand().size());
+    	}
+    }
     public void discardAll()
     {
-        ArrayList<Card>[] hand;
+        ArrayList<Card> hand;
         int row=0;
         for(int x=0;x<players.size();x++)
         {
             hand = players.get(x).getHand();
-            for(int y=0;y<hand.length;y++)
-                if(hand[y].size()!=0)
+            for(int y=0;y<hand.size();y++)
+                if(hand.size()!=0)
                 {
                     row=y;
                 }
-            discard.add(hand[row].remove(0));
+            discard.add(hand.remove(0));
             players.get(x).addCoins(3);
         }
     }
@@ -212,18 +228,18 @@ public class Board {
     {
         if(age%2==1)
         {
-            ArrayList<Card>[] temp1 = players.get(0).getHand();
-            ArrayList<Card>[] temp2 = players.get(1).getHand();
-            ArrayList<Card>[] temp3 = players.get(2).getHand();
+            ArrayList<Card> temp1 = players.get(0).getHand();
+            ArrayList<Card> temp2 = players.get(1).getHand();
+            ArrayList<Card> temp3 = players.get(2).getHand();
             players.get(0).setHand(temp3);
             players.get(1).setHand(temp1);
             players.get(2).setHand(temp2);
         }
         else
         {
-            ArrayList<Card>[] temp1 = players.get(0).getHand();
-            ArrayList<Card>[] temp2 = players.get(1).getHand();
-            ArrayList<Card>[] temp3 = players.get(2).getHand();
+            ArrayList<Card> temp1 = players.get(0).getHand();
+            ArrayList<Card> temp2 = players.get(1).getHand();
+            ArrayList<Card> temp3 = players.get(2).getHand();
             players.get(0).setHand(temp2);
             players.get(1).setHand(temp3);
             players.get(2).setHand(temp1);
@@ -232,53 +248,68 @@ public class Board {
     }
     public String chooseWonderBoard(Player player)
     {
-        Scanner kb = new Scanner(System.in);
+    	
+    	Scanner kb = new Scanner(System.in);
         for(int i = 0; i < boards.size(); i++)
         {
-            System.out.print(boards.get(i) + "	 ");
+            System.out.print(boards.get(i) + "\t");
         }
         System.out.print("\nChoose a location");
         String thing = kb.next();
-        if(thing.equalsIgnoreCase("Giza"))
+        if(thing.equals("Giza")&& !picked.contains("Giza"))
         {
             player.setWonderBoard(new Giza());
-            boards.remove(new Giza());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
-        else if(thing.equalsIgnoreCase("Alexandria"))
+        else if(thing.equalsIgnoreCase("Alexandria")&&!picked.contains(thing))
         {
             player.setWonderBoard(new Alexandria());
-            boards.remove(new Alexandria());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
-        else if(thing.equalsIgnoreCase("Halicarnassus"))
+        else if(thing.equalsIgnoreCase("Halicarnassus")&&!picked.contains(thing))
         {
             player.setWonderBoard(new Halicarnassus());
-            boards.remove(new Halicarnassus());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
-        else if(thing.equalsIgnoreCase("Rhodes"))
+        else if(thing.equalsIgnoreCase("Rhodes")&&!picked.contains(thing))
         {
             player.setWonderBoard(new Rhodes());
-            boards.remove(new Rhodes());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
-        else if(thing.equalsIgnoreCase("Zeus"))
+        else if(thing.equalsIgnoreCase("Zeus")&&!picked.contains(thing))
         {
             player.setWonderBoard(new Zeus());
-            boards.remove(new Zeus());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
-        else if(thing.equalsIgnoreCase("Ephesos"))
+        else if(thing.equalsIgnoreCase("Ephesos")&&!picked.contains(thing))
         {
             player.setWonderBoard(new Ephesos());
-            boards.remove(new Ephesos());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
-        else if(thing.equalsIgnoreCase("Babylon"))
+        else if(thing.equalsIgnoreCase("Babylon")&&!picked.contains(thing))
         {
             player.setWonderBoard(new Babylon());
-            boards.remove(new Babylon());
+            boards.remove(places.indexOf(thing));
+            places.remove(thing);
+            picked.add(thing);
             return "yes";
         }
         else
