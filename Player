@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Player
 {
@@ -43,7 +44,7 @@ public class Player
         hand = new ArrayList<Card>();
         for(int x=0;x<8;x++)
         {
-        	ownedCards[x] = new ArrayList<Card>();
+            ownedCards[x] = new ArrayList<Card>();
         }
         setCoins(3);
         setMilLosses(0);
@@ -137,12 +138,12 @@ public class Player
     }
     public void printHand()
     {
-    	for(Card cc:hand)
+        for(Card cc:hand)
         {
-        	System.out.print(cc.getName()+" "+cc.getCost()+", ");
+            System.out.print(cc.getName()+" (Cost = "+cc.getCost()+"), ");
         }
-    	System.out.println();
-    	
+        System.out.println();
+
     }
     public void setLeftTradeCost(int[] ltc)
     {
@@ -164,12 +165,15 @@ public class Player
                 {
                     leftTradeCost[i] = 1;
                 }
+                System.out.println("Player can now trade with player to the left for raw materials for only 1 coin");
             }
             else
-                for (int i = 4; i < 7; i++)
-                {
+            {
+                for (int i = 4; i < 7; i++) {
                     leftTradeCost[i] = 1;
                 }
+                System.out.println("Player can now trade with player to the left for manufactured goods for only 1 coin");
+            }
         }
         else
         {
@@ -179,15 +183,20 @@ public class Player
                 {
                     rightTradeCost[i] = 1;
                 }
+                System.out.println("Player can now trade with player to the right for raw materials for only 1 coin");
             }
             else
+            {
                 for (int i = 4; i < 7; i++)
                 {
                     rightTradeCost[i] = 1;
                 }
+                System.out.println("Player can now trade with player to the right for manufactured goods for only 1 coin");
+            }
+
         }
     }
-    
+
     public void addTradedCard(Card c)
     {
         ownedCards[ownedMap.get("trade")].add(c);
@@ -243,13 +252,13 @@ public class Player
             {
                 if(!a.isEmpty())
                 {
-                	for (Card cc : a)
+                    for (Card cc : a)
                     {
                         if (cc.getName().equals(p))
                             return true;
                     }
                 }
-            	
+
             }
         }
 
@@ -337,10 +346,16 @@ public class Player
         {
             wb.build();
             ownedCards[ownedMap.get(c.getType())].remove(c);
-            if (wb.location.equals("The Temple of Artemis at Ephesus") && )
-            	addCoins(9);
-            else if (wb.location.contentEquals(""))
-            //work in progress
+            if (wb.location.equals("The Temple of Artemis at Ephesus") && wb.VictoPoints.size() == 2)
+            {
+                addCoins(9);
+                System.out.println("9 coins moved to treasury");
+            }
+            else if (wb.location.equals("The Colossus of Rhodes") && wb.VictoPoints.size() == 2)
+            {
+                warBoost = 2;
+                System.out.println("Player's military strength will now be increased by 2 in all coming wars");
+            }
             return true;
         }
         return false;
@@ -652,5 +667,65 @@ public class Player
     {
         return getCivPoints() + getScientificPoints() + getGuildPoints(players,self) + getWonderPoints() + getMilPoints() + getTreasuryPoints();
     }
+
+    public String sectionToString(int i)
+    {
+        if (i > 7 || i < 0)
+            return null;
+        String ts = "";
+        for (Card c : ownedCards[ownedMap.get("resource")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        return ts;
+    }
+
+    public String toString()
+    {
+        String ts = "";
+        ts += wb.location + "\nCoins: " + getCoins() + "\n";
+        ts += "Directly owned resource cards : ";
+        for (Card c : ownedCards[ownedMap.get("resource")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nCards obtained via trading : ";
+        for (Card c : ownedCards[ownedMap.get("trade")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nCards provided by Wonder : ";
+        for (Card c : ownedCards[ownedMap.get("wb")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nOwned military cards : ";
+        for (Card c : ownedCards[ownedMap.get("military")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nOwned science cards : ";
+        for (Card c : ownedCards[ownedMap.get("science")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nOwned commerce structures : ";
+        for (Card c : ownedCards[ownedMap.get("commerce")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nOwned civilian structures : ";
+        for (Card c : ownedCards[ownedMap.get("civil")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        ts += "\nOwned guild cards : ";
+        for (Card c : ownedCards[ownedMap.get("guild")])
+        {
+            ts += c.getName() + " (Cost = " + c.getCost() + ")\t";
+        }
+        return ts;
+    }
+
 
 }
