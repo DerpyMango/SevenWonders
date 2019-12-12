@@ -1,6 +1,9 @@
 public class Rhodes extends WonderBoard
 {
-
+    public Rhodes()
+    {
+        super();
+    }
     public void setRes() {
         resource = "Ore";
     }
@@ -10,13 +13,21 @@ public class Rhodes extends WonderBoard
     }
 
     public void addWonders() {
-        list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("2 A", new Cost(new int[] {0, 0, 0, 3, 0, 0, 0, 0}, ""));
-        list.put("7", new Cost(new int[] {0, 0, 4, 0, 0, 0, 0, 0}, ""));
+        list.put(3, new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(0, new Cost(new int[] {0, 0, 0, 3, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 0, 4, 0, 0, 0, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 0;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
-        String thing = (String)iter.next();
+    /*public void build()
+    {
+        if (wRewards.size() > rewardKey.length)
+            return;
+        wRewards.add(rewardKey[wRewards.size()]);
+        VictoPoints.add(rewardKey[wRewards.size()]);
+        /*String thing = (String)iter.next();
         temp++;
         if(thing.contains("A"))
             army += thing + "\\";
@@ -24,7 +35,7 @@ public class Rhodes extends WonderBoard
         {
             VictoPoints.add(thing);
         }
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -36,6 +47,6 @@ public class Rhodes extends WonderBoard
     }
     public String toString()
     {
-    	return "Rhodes";
+        return "Rhodes";
     }
 }
