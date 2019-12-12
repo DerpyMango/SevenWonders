@@ -1,5 +1,9 @@
 public class Giza extends WonderBoard
 {
+    public Giza()
+    {
+        super();
+    }
 
     public void setRes() {
         resource = "Metal";
@@ -10,16 +14,19 @@ public class Giza extends WonderBoard
     }
 
     public void addWonders() {
-        list.put("3", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("5", new Cost(new int[] {3, 0, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("7", new Cost(new int[] {0, 4, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(3, new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(5, new Cost(new int[] {3, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 4, 0, 0, 0, 0, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 5;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
+    /*public void build() {
         String thing = (String) iter.next();
         temp++;
         VictoPoints.add(thing);
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -37,6 +44,6 @@ public class Giza extends WonderBoard
     }
     public String toString()
     {
-    	return "Giza";
+        return "Giza";
     }
 }
