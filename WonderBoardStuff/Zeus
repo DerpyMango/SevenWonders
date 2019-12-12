@@ -1,6 +1,9 @@
 public class Zeus extends WonderBoard
 {
-
+    public Zeus()
+    {
+        super();
+    }
     public void setRes() {
         resource = "Wood";
     }
@@ -10,12 +13,15 @@ public class Zeus extends WonderBoard
     }
 
     public void addWonders() {
-        list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("NOPAY", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("7", new Cost(new int[] {0, 0, 2, 0, 0, 0, 0, 0}, ""));
+        list.put(3, new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(0, new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 0, 2, 0, 0, 0, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 0;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
+    /*public void build() {
         String thing = (String) iter.next();
         temp++;
         if(thing.equals("NOPAY"))
@@ -24,7 +30,7 @@ public class Zeus extends WonderBoard
         {
             VictoPoints.add(thing);
         }
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -36,6 +42,6 @@ public class Zeus extends WonderBoard
     }
     public String toString()
     {
-    	return "Zeus";
+        return "Zeus";
     }
 }
