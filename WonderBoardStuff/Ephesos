@@ -1,5 +1,9 @@
 public class Ephesos extends WonderBoard
 {
+    public Ephesos()
+    {
+        super();
+    }
 
     public void setRes() {
         resource = "Papyrus";
@@ -10,12 +14,15 @@ public class Ephesos extends WonderBoard
     }
 
     public void addWonders() {
-        list.put("7", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("9C", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("3", new Cost(new int[] {0, 0, 0, 2, 0, 0, 0, 0}, ""));
+        list.put(3, new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(0, new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 0, 0, 2, 0, 0, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 0;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
+    /*public void build() {
         String thing = (String)iter.next();
         temp++;
         if(thing.contains("C"))
@@ -24,7 +31,7 @@ public class Ephesos extends WonderBoard
         {
             VictoPoints.add(thing);
         }
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -36,6 +43,6 @@ public class Ephesos extends WonderBoard
     }
     public String toString()
     {
-    	return "Ephesos";
+        return "Ephesos";
     }
 }
