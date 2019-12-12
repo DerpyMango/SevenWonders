@@ -1,6 +1,9 @@
 public class Halicarnassus extends WonderBoard
 {
-
+    public Halicarnassus()
+    {
+        super();
+    }
     public void setRes() {
         resource = "Cloth";
     }
@@ -9,13 +12,17 @@ public class Halicarnassus extends WonderBoard
         location = "The Mausoleum of Halicarnassus";
     }
 
-    public void addWonders() {
-        list.put("3", new Cost(new int[] {2, 0, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("NOPAY", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("7", new Cost(new int[] {0, 0, 2, 0, 0, 0, 0, 0}, ""));
+    public void addWonders()
+    {
+        list.put(3, new Cost(new int[] {0, 0, 0, 2, 0, 0, 0, 0}, ""));
+        list.put(0, new Cost(new int[] {0, 0, 3, 0, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 0, 0, 0, 2, 0, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 0;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
+    /*public void build() {
         String thing = (String) iter.next();
         temp++;
         if(thing.equals("NOPAY"))
@@ -24,7 +31,7 @@ public class Halicarnassus extends WonderBoard
         {
             VictoPoints.add(thing);
         }
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -36,6 +43,6 @@ public class Halicarnassus extends WonderBoard
     }
     public String toString()
     {
-    	return "Halicarnassus";
+        return "Halicarnassus";
     }
 }
