@@ -1,6 +1,9 @@
 public class Alexandria extends WonderBoard
 {
-
+    public Alexandria()
+    {
+        super();
+    }
     public void setRes() {
         resource = "Cloth";
     }
@@ -10,13 +13,22 @@ public class Alexandria extends WonderBoard
     }
 
     public void addWonders() {
-        list.put("7", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("c/o/w/m", new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("3", new Cost(new int[] {0, 0, 0, 0, 0, 2, 0, 0}, ""));
+        list.put(3, new Cost(new int[] {0, 2, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(0, new Cost(new int[] {0, 0, 2, 0, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 0, 0, 0, 0, 2, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 0;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
-        String thing = (String)iter.next();
+    /*public void build()
+    {
+        if (wRewards.size() > rewardKey.length)
+            return;
+        wRewards.add(rewardKey[wRewards.size()]);
+        VictoPoints.add(rewardKey[wRewards.size()]);
+
+        /*String thing = (String)iter.next();
         temp++;
         if(thing.contains("c"))
         {
@@ -26,7 +38,7 @@ public class Alexandria extends WonderBoard
         {
             VictoPoints.add(thing);
         }
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -38,6 +50,6 @@ public class Alexandria extends WonderBoard
     }
     public String toString()
     {
-    	return "Alexandria";
+        return "Alexandria";
     }
 }
