@@ -7,7 +7,9 @@ import java.util.Stack;
 public abstract class WonderBoard {
 
     protected String location;
-    protected HashMap<String, Cost> list;
+    protected HashMap<Integer, Cost> list;
+    protected ArrayList<Integer> wRewards;
+    protected int[] rewardKey;
     protected String resource;
     protected ArrayList VictoPoints;
     protected String ending;
@@ -22,21 +24,21 @@ public abstract class WonderBoard {
         coins = "0";
         pay = "";
         army = "";
-        list = new HashMap<String, Cost>();
+        list = new HashMap<Integer, Cost>();
         VictoPoints = new ArrayList();
         ending = "";
         temp = 0;
         setRes();
         setLoc();
+        wRewards = new ArrayList<Integer>();
+        rewardKey = new int[3];
         addWonders();
         create();
     }
 
     public Cost returnWonderCost()
     {
-        Cost thing;
-        thing = list.get(temp + "");
-        return thing;
+        return list.get(rewardKey[wRewards.size()]);
     }
 
     public abstract void setRes();
@@ -65,7 +67,7 @@ public abstract class WonderBoard {
 
     public int numWonders()
     {
-        return temp;
+        return wRewards.size();
     }
 
     public String getLoc()
@@ -75,14 +77,25 @@ public abstract class WonderBoard {
 
     public abstract void addWonders();
 
-    public abstract void build();
-
     public abstract String toString();
-    
+
     public abstract int getVictoPoints();
 
     public String getEnd()
     {
         return ending;
+    }
+
+    public ArrayList<Integer> getWRewards()
+    {
+        return wRewards;
+    }
+
+    public void build()
+    {
+        if (wRewards.size() > rewardKey.length)
+            return;
+        wRewards.add(rewardKey[wRewards.size()]);
+        VictoPoints.add(rewardKey[wRewards.size()]);
     }
 }
