@@ -1,6 +1,9 @@
 public class Babylon extends WonderBoard
 {
-
+    public Babylon()
+    {
+        super();
+    }
     public void setRes() {
         resource = "Clay";
     }
@@ -10,12 +13,15 @@ public class Babylon extends WonderBoard
     }
 
     public void addWonders() {
-        list.put("7", new Cost(new int[] {0, 0, 0, 2, 0, 0, 0, 0}, ""));
-        list.put("Lit/Math/Engi", new Cost(new int[] {3, 0, 0, 0, 0, 0, 0, 0}, ""));
-        list.put("3", new Cost(new int[] {0, 0, 0, 4, 0, 0, 0, 0}, ""));
+        list.put(3, new Cost(new int[] {0, 0, 0, 2, 0, 0, 0, 0}, ""));
+        list.put(0, new Cost(new int[] {3, 0, 0, 0, 0, 0, 0, 0}, ""));
+        list.put(7, new Cost(new int[] {0, 0, 0, 4, 0, 0, 0, 0}, ""));
+        rewardKey[0] = 3;
+        rewardKey[1] = 0;
+        rewardKey[2] = 7;
     }
 
-    public void build() {
+    /*public void build() {
         String thing = (String)iter.next();
         temp++;
         if(thing.contains("Lit"))
@@ -26,7 +32,7 @@ public class Babylon extends WonderBoard
         {
             VictoPoints.add(thing);
         }
-    }
+    }*/
 
     public int getVictoPoints()
     {
@@ -38,6 +44,6 @@ public class Babylon extends WonderBoard
     }
     public String toString()
     {
-    	return "Babylon";
+        return "Babylon";
     }
 }
